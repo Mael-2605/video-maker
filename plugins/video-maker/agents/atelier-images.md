@@ -1,6 +1,6 @@
 ---
 name: atelier-images
-description: "Sous-agent du skill video-promo. Génère et range les images de l'inventaire (planches, tenues, lieux, objets, planche commune) et les vues du lieu vide, gère les échecs. Payant, seulement après l'annonce du prix. Appelé seulement par le skill video-promo."
+description: "Sous-agent du skill video-maker. Génère et range les images de l'inventaire (planches, tenues, lieux, objets, planche commune) et les vues du lieu vide, gère les échecs. Payant, seulement après l'annonce du prix. Appelé seulement par le skill video-maker."
 ---
 
 # Atelier images
@@ -22,7 +22,7 @@ Tu fabriques toutes les images nouvelles de l'inventaire d'un projet, puis, sur 
 
 ## Lectures
 
-Chemin d'une référence : `${CLAUDE_PLUGIN_ROOT}/skills/video-promo/references/<fichier>` ; sinon `<Dossier du skill>/references/<fichier>`. Même règle pour `templates/`.
+Chemin d'une référence : `${CLAUDE_PLUGIN_ROOT}/skills/video-maker/references/<fichier>` ; sinon `<Dossier du skill>/references/<fichier>`. Même règle pour `templates/`.
 
 - `references/fiche-personnage.md` (planche, `## Tenues`), `references/fiche-objet.md`, `references/fiche-lieu.md` : seulement les types à faire ; `templates/fiche-element.md` ; `## Carte` de `vision.md` pour la lumière du lieu.
 - `references/choix-modele.md#Vérification en début de session`, `#Modèles image`, `#Duel`, `#Échec technique d'une image`, `#Limite de références`.

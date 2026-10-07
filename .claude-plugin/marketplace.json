@@ -1,11 +1,11 @@
 {
-  "name": "video-promo-marketplace",
+  "name": "video-maker-marketplace",
   "owner": { "name": "Flowia" },
   "description": "Outil pour créer des vidéos promo courtes et verticales, avec un personnage qui parle.",
   "plugins": [
     {
-      "name": "video-promo",
-      "source": "./plugins/video-promo",
+      "name": "video-maker",
+      "source": "./plugins/video-maker",
       "description": "Vidéos promo courtes avec personnages IA hyper réalistes, générées via Higgsfield."
     }
   ]

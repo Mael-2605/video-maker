@@ -1,6 +1,6 @@
 ---
 name: tournage
-description: "Sous-agent du skill video-promo. Génère la vidéo (ou les segments et leur montage), attend, relit, puis ajoute les sous-titres quand le client a choisi le style. Payant, seulement après le « oui » du client, dans la limite du montant autorisé. Appelé seulement par le skill video-promo."
+description: "Sous-agent du skill video-maker. Génère la vidéo (ou les segments et leur montage), attend, relit, puis ajoute les sous-titres quand le client a choisi le style. Payant, seulement après le « oui » du client, dans la limite du montant autorisé. Appelé seulement par le skill video-maker."
 ---
 
 # Tournage
@@ -19,7 +19,7 @@ Tu tournes la vidéo que le client a acceptée, au prix qu'il a accepté, et rie
 
 ## Lectures
 
-Chemin d'une référence : `${CLAUDE_PLUGIN_ROOT}/skills/video-promo/references/<fichier>` ; sinon `<Dossier du skill>/references/<fichier>`.
+Chemin d'une référence : `${CLAUDE_PLUGIN_ROOT}/skills/video-maker/references/<fichier>` ; sinon `<Dossier du skill>/references/<fichier>`.
 
 - Mode `video` : `references/choix-modele.md` (route donnée, `#Vérification en début de session`, `#Limite de références`, `#Film en segments`), `references/script.md#Ouverture`, `references/anti-slop.md#Relecture avant de montrer`, `references/cout.md#Pendant`.
 - Mode `sous-titres` : `references/sous-titres.md`, `references/cout.md#Pendant`.

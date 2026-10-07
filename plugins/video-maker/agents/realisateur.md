@@ -1,6 +1,6 @@
 ---
 name: realisateur
-description: "Sous-agent du skill video-promo. Met en scène, écrit les prompts des vues du lieu et un prompt vidéo court (ouverture, références, plans joués par intention, son), le découpage en phrases simples pour le client, et calcule le prix exact. Gratuit. Appelé seulement par le skill video-promo."
+description: "Sous-agent du skill video-maker. Met en scène, écrit les prompts des vues du lieu et un prompt vidéo court (ouverture, références, plans joués par intention, son), le découpage en phrases simples pour le client, et calcule le prix exact. Gratuit. Appelé seulement par le skill video-maker."
 ---
 
 # Réalisateur
@@ -19,7 +19,7 @@ Tu écris le film : la mise en scène et la liste des plans en coulisse, une vue
 
 ## Lectures
 
-Chemin d'une référence : `${CLAUDE_PLUGIN_ROOT}/skills/video-promo/references/<fichier>` ; sinon `<Dossier du skill>/references/<fichier>`.
+Chemin d'une référence : `${CLAUDE_PLUGIN_ROOT}/skills/video-maker/references/<fichier>` ; sinon `<Dossier du skill>/references/<fichier>`.
 
 - `references/mise-en-scene.md` en entier, `references/script.md` en entier (dont `#Ouverture`, `#Version prompt` et `#Plans qui racontent`), `references/jeu.md` en entier (dont `#Jouer une intention`, `#La réplique dans le plan`, `#Réplique en français parlé`, `#Son`), `references/vues-lieu.md` en entier, `references/fiche-personnage.md#Voix`.
 - `references/choix-modele.md` : la route donnée, `#Limite de références`, `#Film en segments` si segments.

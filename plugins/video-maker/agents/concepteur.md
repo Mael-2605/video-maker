@@ -1,6 +1,6 @@
 ---
 name: concepteur
-description: "Sous-agent du skill video-promo. Cherche l'idée en coulisse, puis prépare la carte vision d'une vidéo promo : histoire, style, inventaire des éléments à fixer, prix des images et trois versions de la vidéo, chacune racontée en un court paragraphe. Gratuit. Appelé seulement par le skill video-promo."
+description: "Sous-agent du skill video-maker. Cherche l'idée en coulisse, puis prépare la carte vision d'une vidéo promo : histoire, style, inventaire des éléments à fixer, prix des images et trois versions de la vidéo, chacune racontée en un court paragraphe. Gratuit. Appelé seulement par le skill video-maker."
 ---
 
 # Concepteur
@@ -20,7 +20,7 @@ Tu prépares la vision d'une vidéo verticale pour les réseaux. Le sujet vient 
 
 ## Lectures
 
-Chemin d'une référence : `${CLAUDE_PLUGIN_ROOT}/skills/video-promo/references/<fichier>` ; s'il ne s'ouvre pas, `<Dossier du skill>/references/<fichier>`. Même règle pour `templates/`.
+Chemin d'une référence : `${CLAUDE_PLUGIN_ROOT}/skills/video-maker/references/<fichier>` ; s'il ne s'ouvre pas, `<Dossier du skill>/references/<fichier>`. Même règle pour `templates/`.
 
 - `references/recherche.md` en entier, `references/hooks.md` en entier, `references/conformite.md`, `references/anti-slop.md#Ton du skill` et `#Tics d'écriture à bannir (répliques)`, `references/jeu.md#Réplique en français parlé`, `references/mise-en-scene.md#Beats` (points 2 à 5) et `#Répliques à l'écran`.
 - `references/fiche-personnage.md#Dans l'inventaire`, `#Tenues` et `#Modèle et appel` ; `references/fiche-objet.md#Dans l'inventaire` et `#Modèle et appel` ; `references/fiche-lieu.md#Dans l'inventaire`, `#Règles de cohérence` (lumière de la carte) et `#Modèle et appel`.

@@ -1,5 +1,5 @@
 ---
-name: video-promo
+name: video-maker
 description: "Crée une vidéo verticale courte pour les réseaux (reel, TikTok, LinkedIn) avec un personnage IA hyper réaliste qui parle français, via Higgsfield. À utiliser dès que l'utilisateur veut une vidéo, un reel, un TikTok, une pub, ou parle d'un personnage (« Jeff ») à mettre en scène. Trois moments : vision, images et découpage, vidéo livrée."
 ---
 
@@ -82,10 +82,10 @@ Reprise à l'étape `etape + 1`, en relisant seulement `etat.md`, `vision.md`, `
 
 | Sous-agent | `subagent_type` | Quand | Coût |
 |---|---|---|---|
-| concepteur | `video-promo:concepteur` | Moment 1 : carte, correction de carte, autres pistes | gratuit |
-| atelier-images | `video-promo:atelier-images` | Après le choix au moment 1 ; vues du lieu au moment 2 ; correction d'image, de vue ou élément nouveau | payant, prix déjà annoncé |
-| realisateur | `video-promo:realisateur` | Images prêtes ; correction d'un plan ; correction après la vidéo | gratuit |
-| tournage | `video-promo:tournage` | Après le « oui » du moment 2 ; sous-titres | payant, montant autorisé |
+| concepteur | `video-maker:concepteur` | Moment 1 : carte, correction de carte, autres pistes | gratuit |
+| atelier-images | `video-maker:atelier-images` | Après le choix au moment 1 ; vues du lieu au moment 2 ; correction d'image, de vue ou élément nouveau | payant, prix déjà annoncé |
+| realisateur | `video-maker:realisateur` | Images prêtes ; correction d'un plan ; correction après la vidéo | gratuit |
+| tournage | `video-maker:tournage` | Après le « oui » du moment 2 ; sous-titres | payant, montant autorisé |
 
 - **Appel** : outil Agent, `subagent_type` ci-dessus, toujours avec `run_in_background: false` (l'outil lance sinon le sous-agent en arrière-plan) : attendre le retour avant de répondre au client. La consigne commence par les trois lignes communes, puis les champs de la section `## Consigne reçue` du sous-agent, un par ligne (`Champ : valeur`) :
   ```

@@ -1,4 +1,4 @@
-# video-promo — installation
+# video-maker — installation
 
 Ce plugin Claude Code crée des vidéos courtes et verticales pour les réseaux sociaux (Reels, TikTok, LinkedIn), avec un personnage qui parle. Le sujet, c'est vous qui le donnez : un produit, un service, un événement, une idée.
 
@@ -26,8 +26,8 @@ Dans l'onglet Code, ouvrez un dossier dédié à vos vidéos, par exemple `Docum
 Toujours dans l'onglet Code, tapez ces deux commandes l'une après l'autre :
 
 ```
-/plugin marketplace add Mael-2605/video-promo
-/plugin install video-promo@video-promo-marketplace
+/plugin marketplace add Mael-2605/video-maker
+/plugin install video-maker@video-maker-marketplace
 ```
 
 Fermez puis rouvrez Claude pour que le plugin soit pris en compte.
@@ -36,11 +36,11 @@ Fermez puis rouvrez Claude pour que le plugin soit pris en compte.
 
 Dites simplement à Claude :
 
-> Mets à jour le plugin video-promo.
+> Mets à jour le plugin video-maker.
 
 Claude installe la dernière version, ou vous dit que vous l'avez déjà. Après une mise à jour, fermez et rouvrez Claude. Vos personnages, lieux, projets et préférences ne bougent pas : ils restent dans votre dossier de travail.
 
-Pour ne plus y penser : tapez `/plugin`, ouvrez l'onglet des marketplaces, choisissez `video-promo-marketplace` et activez la mise à jour automatique. Claude vérifie alors à chaque démarrage.
+Pour ne plus y penser : tapez `/plugin`, ouvrez l'onglet des marketplaces, choisissez `video-maker-marketplace` et activez la mise à jour automatique. Claude vérifie alors à chaque démarrage.
 
 ## Utilisation
 
