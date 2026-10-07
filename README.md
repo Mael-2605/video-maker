@@ -30,6 +30,20 @@ Toujours dans l'onglet Code, tapez ces deux commandes l'une après l'autre :
 /plugin install video-promo@video-promo-marketplace
 ```
 
+Fermez puis rouvrez Claude pour que le plugin soit pris en compte.
+
+### 4. Mettre à jour
+
+Quand une nouvelle version est annoncée, tapez dans un terminal :
+
+```
+claude plugin marketplace update video-promo-marketplace && claude plugin update video-promo@video-promo-marketplace
+```
+
+Puis fermez et rouvrez Claude. Vos personnages, lieux, projets et préférences ne bougent pas : ils restent dans votre dossier de travail.
+
+Pour ne plus y penser : tapez `/plugin`, ouvrez l'onglet des marketplaces, choisissez `video-promo-marketplace` et activez la mise à jour automatique. Claude vérifie alors à chaque démarrage.
+
 ## Utilisation
 
 Il suffit de demander, par exemple :
