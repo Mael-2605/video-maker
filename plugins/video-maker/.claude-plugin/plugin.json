@@ -1,6 +1,6 @@
 {
   "name": "video-maker",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "description": "Crée des vidéos verticales pour les réseaux sociaux, avec des personnages IA hyper réalistes, en français, via Higgsfield : vision, trame, cuts un par un, vidéo montée, sous-titres, coût.",
   "author": { "name": "Flowia" },
   "keywords": ["video", "higgsfield", "promo", "reels", "tiktok"]

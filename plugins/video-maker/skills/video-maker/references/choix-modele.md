@@ -19,7 +19,7 @@ Ids et paramètres retenus :
 |---|---|---|---|
 | Visages | `gpt_image_2_5` | `aspect_ratio`, `quality`, `resolution` 1k/2k/4k | `image_references` |
 | Objets, lieux, images de base et vues du lieu | `nano_banana_pro` | `aspect_ratio`, `resolution` 1k/2k/4k (défaut 2k) | `image_references` |
-| Vidéo parlée, un cut (défaut) | `seedance_2_5` | brouillon : `mode:"omni_reference"`, `draft: true` (480p), `duration` 4–30 s (4 s au minimum), `aspect_ratio:"9:16"`, `generate_audio:true` ; finalisation : `draft_job_id`, `resolution:"1080p"`, `bitrate_mode:"high"` (même prix que `standard`) | `image_references` (9 images au plus) ; `audio_references` : l'extrait de voix d'un personnage (`references/montage.md#Extraire une voix`) ; jamais `start_image`, `end_image` ni `video_references` |
+| Vidéo parlée, un cut (défaut) | `seedance_2_5` | brouillon : `mode:"omni_reference"`, `draft: true` (480p), `duration` 4–30 s (4 s au minimum), `aspect_ratio:"9:16"`, `generate_audio:true` ; finalisation : `draft_job_id`, mêmes médias, durée, `aspect_ratio`, `generate_audio` et prompt que le brouillon, `bitrate_mode:"high"` (même prix que `standard`) ; toujours en 1080p | `image_references` (9 images au plus) ; `audio_references` : l'extrait de voix d'un personnage (`references/montage.md#Extraire une voix`) ; jamais `start_image`, `end_image` ni `video_references` |
 | Secours d'un cut | `kling3_0` | `duration` **3–15 s seulement**, `mode` std/pro/4k, `sound` on/off, `aspect_ratio:"9:16"` | `start_image`, `end_image` seulement : aucune planche possible |
 
 Aucun modèle audio : Seedance crée la voix avec l'image, à partir de la réplique du prompt. Seul audio en référence : l'extrait de voix tiré d'un cut gardé du même projet (`references/montage.md#Extraire une voix`). Relire avec `models_explore` combien d'`audio_references` un appel accepte et si le mode brouillon les prend. Si le brouillon refuse `audio_references`, ou si l'extrait manque (extraction en échec, ou jamais faite), le tournage tire le cut sans l'extrait (rien n'était parti : pas de nouvel achat) et le signale ; le personnage passe ensuite aux deux ou trois mots de voix dans les cuts encore `à faire` (`references/montage.md#Échec`) ; aucun prix en plus, aucune question au client.
@@ -132,7 +132,12 @@ generate_video {
 generate_video {
   model: "seedance_2_5",
   draft_job_id: <job id du brouillon gardé>,
-  resolution: "1080p",
+  mode: "omni_reference",
+  duration: <celle du brouillon>,
+  aspect_ratio: "9:16",
+  generate_audio: true,
+  prompt: <celui du brouillon>,
+  <mêmes médias que le brouillon : image_references, audio_references>,
   bitrate_mode: "high"
 }
 ```
@@ -141,7 +146,7 @@ generate_video {
 - **Toutes les images en `image_references`.** Jamais de `start_image` ni d'`end_image` : une image imposée pousse le modèle à recopier sa pose.
 - **9 images au plus** : `## Limite de références`.
 - `bitrate_mode: "high"` à la finalisation : un débit plus haut garde le grain et les pores ; même `get_cost` que `standard` (constaté le 2026-09-28, à relire avec le prix).
-- Si le schéma de `models_explore` demande de répéter le prompt et les médias à la finalisation, les reprendre tels qu'ils sont partis au brouillon.
+- La finalisation répète, tels qu'ils sont partis au brouillon, les médias, la durée, `aspect_ratio`, `generate_audio` et le prompt ; sans eux Higgsfield refuse (422 « omni_reference requires at least one reference media item »). Pas de `resolution` : la finalisation sort toujours en 1080p (relevé le 2026-10-08 : 720p demandé, 1080×1920 reçu).
 - Le rôle de chaque image tient dans le paragraphe `References:` du prompt, une courte proposition par média (`references/script.md#Version prompt`).
 
 **Proposition de preset.** `generate_video` peut renvoyer une recommandation de preset (`preset_recommendation`, par exemple « IN THE DARK ») au lieu de soumettre : rien n'est parti. Le tournage la refuse sans rien demander au client : il renvoie le même appel, mot pour mot, avec `declined_preset_id` égal à l'id proposé. Jamais de bascule vers le preset, jamais de question au client. Même chose sur un appel `get_cost:true` et sur un appel de finalisation.
@@ -150,8 +155,8 @@ generate_video {
 
 - **Durée** : Seedance génère 4 s au minimum. Un cut prévu à 2 ou 3 s est généré à 4 s (son prix aussi) et coupé à sa durée prévue au montage (`references/montage.md#Assembler les cuts`).
 - **Brouillon** : 480p, ~3 crédits par seconde (15 crédits pour 5 s), relu avec `get_cost:true`. C'est lui que le client voit et garde.
-- **Finalisation** : seulement pour un brouillon gardé, avec son `draft_job_id`, en 1080p, `bitrate_mode:"high"`. Le brouillon doit être finalisé dans les sept jours (date écrite avec son job dans la colonne `brouillon` de `## Cuts`) ; au-delà, il n'est plus repris : nouveau brouillon, nouveau prix, nouveau « oui ».
-- **Prix d'une finalisation** : inconnu tant qu'aucun brouillon n'existe. À la trame, il est estimé par `get_cost:true` sur le même cut en 1080p direct (`resolution:"1080p"`, sans `draft`), prix majorant (~12 crédits par seconde) ; avant chaque finalisation, le tournage relit `get_cost:true` sur l'appel exact.
+- **Finalisation** : seulement pour un brouillon gardé, avec son `draft_job_id` et les mêmes médias, durée, ratio, audio et prompt que le brouillon, `bitrate_mode:"high"`. Toujours en 1080p : jamais de 720p à proposer. Le rendu garde le cadrage et le mouvement du brouillon (relevé le 2026-10-08). Le brouillon doit être finalisé dans les sept jours (date écrite avec son job dans la colonne `brouillon` de `## Cuts`) ; au-delà, il n'est plus repris : nouveau brouillon, nouveau prix, nouveau « oui ».
+- **Prix d'une finalisation** : inconnu tant qu'aucun brouillon n'existe. À la trame, il est estimé à environ 15 crédits par seconde générée (relevé le 2026-10-08 : 60 pour 4 s), jamais au prix du 1080p direct (12 par seconde, soit 48 pour 4 s), qui est plus bas. Avant chaque finalisation, le tournage relit `get_cost:true` sur l'appel exact, avec `draft_job_id`.
 - **Un cut à la fois** : jamais de lot de cuts. Le cut suivant part dès que le précédent est gardé, pendant que celui-ci se finalise.
 - **Échec d'un cut** : pas de relance automatique ; nouvel essai, nouveau prix, nouveau « oui ». Les cuts gardés ne sont jamais refaits sans demande du client.
 
