@@ -60,7 +60,7 @@ Familles écartées : démonstration ou déballage de produit, témoignage d'un 
 
 ## Mécanismes visuels
 
-Pour chacun : ce que c'est, pourquoi ça arrête le pouce, comment écrire le plan 1 (anglais, sujet ou objet et action d'abord, angle de caméra après, à compléter selon `references/script.md#Version prompt`), et un exemple conforme. Dans les fragments, `Jeff (@Image 1, …)` tient la place de sa présentation dans le prompt (prénom et 2 à 4 mots visibles, `references/script.md#Un plan`), et l'émotion du plan s'y ajoute (`references/jeu.md#Jouer une intention`) ; le geste vient du prompt seul : les vues du lieu (`references/vues-lieu.md`) ne montrent que le décor vide.
+Pour chacun : ce que c'est, pourquoi ça arrête le pouce, comment écrire le plan 1 (anglais, sujet ou objet et action d'abord, angle de caméra après, à compléter selon `references/script.md#Version prompt`), et un exemple conforme. Dans les fragments, `Jeff (@Image 1, …)` tient la place de sa présentation dans le prompt (prénom et 2 à 4 mots visibles, `references/script.md#Le plan du cut`), et l'émotion du plan s'y ajoute (`references/jeu.md#Jouer une intention`) ; le geste vient du prompt seul : les vues du lieu (`references/vues-lieu.md`) ne montrent que le décor vide.
 
 Règles communes : l'objet est lisible sur un petit écran et placé au centre du cadre (le haut et le bas sont couverts par l'interface) ; il ne porte aucune inscription lisible ; le son du geste tombe dans les 0,4 premières secondes ; la première image est déjà éclairée et en mouvement ; jamais de graphique ni d'écran qui affiche un résultat.
 
@@ -194,11 +194,11 @@ C · <Nature> — <paragraphe de la version C>
 
 Laquelle ? Ou dites-moi ce qu'il faut changer.
 ```
-- `Style` : l'une des quatre familles de `references/script.md#Ouverture`, en mots simples (« comme au cinéma », « comme filmé au téléphone par un ami », « façon reportage, caméra à l'épaule », « comme une photo de produit en studio »), plus une précision au besoin. Une scène de fiction : « comme au cinéma » ; « filmé au téléphone » seulement si quelqu'un de la scène filme. `Lumière` : source, heure et couleur en mots de tous les jours ; c'est elle que reprennent l'image du lieu, ses vues et l'ouverture de la vidéo. `Prises de vue` : la caméra et la distance, communes aux trois versions, sans nombre de plans.
+- `Style` : l'une des quatre familles de `references/script.md#Ouverture`, en mots simples (« comme au cinéma », « comme filmé au téléphone par un ami », « façon reportage, caméra à l'épaule », « comme une photo de produit en studio »), plus une précision au besoin. Une scène de fiction : « comme au cinéma » ; « filmé au téléphone » seulement si quelqu'un de la scène filme. `Lumière` : source, heure et couleur en mots de tous les jours ; c'est elle que reprennent l'image de base du lieu, ses vues et l'ouverture de chaque cut. `Prises de vue` : la caméra et la distance, communes aux trois versions, sans nombre de plans.
 - `<Nature>` : « Parlé », « Visuel », « Situation », une fois chacune, dans l'ordre de `## Tenir compte des préférences`. A est la piste proche ; B et C, plus éloignées, ne le disent pas. Codes nature et famille dans `vision.md`, `## Accroches`, pas dans la carte.
-- `Je fixe` : existants marqués « déjà prêt » (« Jeff, déjà prêt ») ; nouveaux avec leurs choix en quelques mots ; puis les vues du lieu vide (« et trois vues du bar, vide », `references/vues-lieu.md#Nombre et prix`). Le prix couvre les images nouvelles et les vues de la version A, sans question.
+- `Je fixe` : existants marqués « déjà prêt » (« Jeff, déjà prêt ») ; nouveaux avec leurs choix en quelques mots ; puis l'image de base de chaque lieu et ses vues (« le bar vu de loin, et deux vues du bar, vide », `references/vues-lieu.md#Nombre et prix`). Le prix couvre les images nouvelles et les vues de la version A, sans question.
 - Une version qui demande un élément de plus (un lieu, un objet qui porte un plan) : à la fin de son paragraphe, `(+1 image : <élément>, ~<X> crédits)`.
-- Plus de 30 s : `Trois versions (1 min, en 2 parties assemblées automatiquement) :`.
+- Plus de 30 s : `Trois versions (1 min) :` ; la vidéo se fait cut par cut comme les autres.
 - Réplique reformulée pour conformité : pas de ligne à part. Le paragraphe de la version qui la porte (A, quand la phrase vient du client) finit par une courte proposition tirée de `references/conformite.md#Réponse au client` (« … ; j'ai reformulé la phrase, une pub ne peut pas promettre un résultat sûr. »).
 - Rien de la recherche n'apparaît dans la carte (vérités, angles, idées barrées) : chaque paragraphe raconte la version, il ne la justifie pas.
 - Correction de la carte : seules les lignes ou les paragraphes changés, avec le nouveau prix.
@@ -241,14 +241,14 @@ Laquelle ? Ou dites-moi ce qu'il faut changer.
 
 ## Du hook au premier plan
 
-Le hook choisi écrit le début du plan 1 du prompt (`references/script.md#Un plan`) et la ligne 1 du découpage.
+Le hook choisi écrit le début du plan du cut 1 (`references/script.md#Le plan du cut`) et la ligne 1 de la trame.
 
 - Les premiers mots du plan 1 sont le sujet (ou l'objet) et l'action du hook ; l'angle de caméra vient après. Pour un mécanisme, partir de son fragment « Plan 1 », réécrit en phrase de récit avec l'émotion nommée (`references/jeu.md#Jouer une intention`).
-- Plan 1 d'un hook visuel : 2,5 à 4 s (`Shot 1 (0-3s)`), puis le plan où la phrase se développe, ou la phrase dans le même plan si le geste la porte.
+- Cut 1 d'un hook visuel : 3 à 4 s (`Shot (0-4s)`), puis le cut 2 où la phrase se développe, ou la phrase dans le même cut si le geste la porte.
 - Un angle de hook (vue de dessus, vue depuis la table, vue subjective, bascule de mise au point) s'écrit dans le plan 1 seulement.
 - Hook tourné dans un second lieu (voiture, entrée d'immeuble) : ce lieu a son image et sa vue, et le plan 1 la cite (`the van's cab as in @Image 6`).
 - Hook parlé : la réplique est dans le plan 1, amenée simplement (`references/jeu.md#La réplique dans le plan`), et le plan démarre sur un geste en cours, jamais sur une pose.
-- Découpage : la ligne 1 reprend ce qu'on voit dans l'accroche choisie.
+- Trame : la ligne 1 reprend ce qu'on voit dans l'accroche choisie.
 
 ## Ligne de journal
 

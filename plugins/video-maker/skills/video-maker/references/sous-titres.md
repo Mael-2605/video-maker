@@ -4,7 +4,7 @@
 
 ## Quand
 
-Uniquement après le « oui » du client sur la vidéo (moment 3). Jamais avant : pas de sous-titres sur un brouillon, pas d'anticipation pendant le choix vidéo.
+Uniquement après le « oui » du client sur la vidéo montée (moment 4). Jamais avant : pas de sous-titres sur un brouillon, pas d'anticipation pendant le choix vidéo.
 
 ## Style
 
@@ -29,11 +29,11 @@ Variante naturelle UGC, ajoutée par défaut à tous les styles ci-dessus : `--n
 
 ## Appel
 
-Fait par le tournage, sur consigne `Mode : sous-titres` avec le style choisi. Film en segments : sur le media id du film assemblé.
+Fait par le tournage, consigne `sous-titres`, avec le style choisi, toujours sur le media id du montage.
 
 1. `get_workflow_instructions {workflow:"subtitles"}` (gratuit) — relire les étapes à chaque session, ne pas les figer de mémoire.
-2. Suivre la route « Finished remote video » de ce workflow : la vidéo validée est déjà en ligne, pas de nouvel upload.
-3. Texte d'auteur : la réplique du script (pas une transcription automatique) via `--script`, plus `--language fr`.
+2. Suivre la route « Finished remote video » de ce workflow : la vidéo montée est déjà en ligne, pas de nouvel upload.
+3. Texte d'auteur : la réplique de chaque cut, dans l'ordre de la trame (pas une transcription automatique) via `--script`, plus `--language fr`.
 4. Tout l'appel tient dans un seul `sandbox_exec`.
 5. `media_confirm` une seule fois, sur le résultat final.
 6. La vidéo sans sous-titres reste le master : ne jamais l'écraser, les sous-titres produisent un fichier à part.

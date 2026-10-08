@@ -10,7 +10,7 @@
 
 `AAAA-MM-JJ | <type> | <détail> | projet=<slug>`
 
-Types : `duel`, `hook`, `script-correction`, `video-avis`, `image-refus`, `element-cree`, `preference-promue`, `preference-retiree`.
+Types : `duel`, `hook`, `script-correction`, `cut-correction`, `cut-garde`, `video-avis`, `image-refus`, `element-cree`, `preference-promue`, `preference-retiree`.
 
 Exemples :
 
@@ -18,6 +18,8 @@ Exemples :
 - `2026-10-02 | duel | vue-lieu | gagnant=nano-banana-pro | perdant=gpt-image | projet=2026-10-02-canape-jeff`
 - `2026-10-02 | hook | nature=parle | famille=question-directe | rejetes=visuel:plein-geste,situation:mini-scene | projet=2026-10-02-canape-jeff` (détail de la ligne `hook`, dont le champ facultatif `replique=` : `references/hooks.md#Ligne de journal`)
 - `2026-10-02 | script-correction | "plus court, moins formel" | projet=2026-10-02-canape-jeff`
+- `2026-10-08 | cut-correction | cut=2 | "de la main droite" | projet=2026-10-08-jeff-croissant`
+- `2026-10-08 | cut-garde | cut=2 | essais=2 | projet=2026-10-08-jeff-croissant`
 - `2026-10-02 | element-cree | personnage=jeff | projet=2026-10-02-canape-jeff`
 - `2026-10-02 | preference-promue | hooks:question-directe | projet=2026-10-02-canape-jeff`
 - `2026-10-09 | preference-promue | hooks:nature-visuel | projet=2026-10-09-jeff-voiture`

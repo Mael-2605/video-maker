@@ -33,7 +33,7 @@ On écrit l'émotion que le modèle sait jouer, précise, accrochée à l'action
 ## Rythme et dernier plan
 
 - Une action principale par plan, 3 à 5 s pour un plan avec jeu, 2 à 3 s pour un passage muet. Repère, pas règle : la durée découle des actions (`references/mise-en-scene.md#Blocking et jeu`).
-- Plans à la suite (`Shot 1 (0-5s)`, `Shot 2 (5-8s)`…) ou plan continu : `references/script.md#Un plan`.
+- Un seul plan par cut : `references/script.md#Le plan du cut`.
 - Le dernier plan garde du mouvement jusqu'à la dernière image : un sourire qui arrive, un regard, un verre qu'on lève. Après la dernière réplique, la bouche est fermée, mais le visage vit.
 - Pour une fin, jamais `hold`, `freeze`, `static pose` ni `stays still` : le clip s'éteint et le visage se fige.
 
@@ -58,7 +58,7 @@ Par défaut, le modèle rend un corps reposé, sur un sol plat, par temps doux. 
 
 Avant (essai réel, après une rafale) : `He waits, then pushes off the snow, stands and keeps walking.`
 
-Après : `Shot 3 (12-18s): Second hour of the climb, a 12 kg pack on his back, the climber leans on his ice axe and rises from one knee over two seconds, torso bent into the steep snow slope, exhausted but stubborn; his first steps are short and heavy, one every two seconds, the wind pressing his jacket to his back, his breath fogging.`
+Après : `Shot (0-6s), the snow slope as in @Image 5: Second hour of the climb, a 12 kg pack on his back, the climber leans on his ice axe and rises from one knee over two seconds, torso bent into the steep snow slope, exhausted but stubborn; his first steps are short and heavy, one every two seconds, the wind pressing his jacket to his back, his breath fogging.`
 
 ## Ce qui fait robot
 
@@ -116,16 +116,16 @@ Avant / après :
 
 ## Son
 
-Une seule ligne, après le dernier plan, juste avant `No subtitles, no text.` : l'ambiance du lieu, du plus proche au plus lointain, puis la musique si elle va au lieu.
+Une seule ligne, après le plan du cut, juste avant `No subtitles, no text.` : l'ambiance du lieu, du plus proche au plus lointain.
 
-`Ambient bar sounds, clinking glasses, soft murmur, quiet lounge music in the background.`
+`Ambient bar sounds, clinking glasses, soft murmur.`
 
 - 2 ou 3 sons du lieu, ceux qu'on entendrait vraiment là (verres, machine à café, rue, vagues, vent). Chaque son a sa source dans l'image (`references/mise-en-scene.md#Registre des objets et du son`) : pas d'oiseaux dans une pièce fermée.
-- **Musique permise** quand elle va au lieu et qu'on l'y entendrait : musique lounge discrète dans un bar, radio dans une cuisine, rien sur une arête en montagne. Elle rend la scène moins figée ; elle reste `quiet`, `in the background`.
+- **Pas de musique dans un cut** : chaque cut est généré à part, chacun jouerait un autre morceau et le montage la ferait sauter. L'ambiance du lieu suffit, identique dans chaque cut d'un même lieu (`references/script.md#Continuité entre les cuts`).
 - Jamais de voix off ni de narration sauf demande du client, jamais de `whoosh` ni de montée d'effet : on ne les écrit pas. Un rendu précédent en avait ajouté : la ligne finit par `no voice-over, no whooshes` (`references/anti-slop.md#Exclusions en positif`).
 - Pas de liste de bruits datés geste par geste : le modèle met lui-même le son des gestes qu'il montre.
 
-Exemples : `Café sounds, the espresso machine hissing, cups on saucers, street noise through the window, a radio playing softly behind the counter.` · `Open-air terrace, water lapping at the pool edge, a light breeze in the olive trees, distant birds.` · `Wind across the ridge, crampons crunching in the snow.`
+Exemples : `Café sounds, the espresso machine hissing, cups on saucers, street noise through the window.` · `Open-air terrace, water lapping at the pool edge, a light breeze in the olive trees, distant birds.` · `Wind across the ridge, crampons crunching in the snow.`
 
 ## Exemple avant / après
 
@@ -142,8 +142,9 @@ pourrais lui envoyer un spritz, au monsieur en veste beige qui est dehors ?"
 
 Après :
 ```
-Shot 2 (5-8s): Close-up at the counter. Her cheeks flushing, she avoids the
-bartender's eyes and says quietly in French: "Un spritz, s'il vous plaît." She
+Shot (0-4s), the counter as in @Image 5: Clara, a young brunette woman, in
+close-up. Her cheeks flushing, she avoids the bartender's eyes and says quietly
+to him in French, a little embarrassed: "Un spritz, s'il vous plaît." She
 taps her card on the payment terminal; the bartender nods with a knowing grin,
 and she bites back a shy smile.
 ```
@@ -152,13 +153,13 @@ and she bites back a shy smile.
 
 Avant d'enregistrer le prompt, le relire ligne à ligne. Un point manque : corriger d'abord.
 
-- [ ] Cinq parties seulement : ouverture, `References:`, plans, ligne de son, `No subtitles, no text.` ; environ 200 à 350 mots pour 15 s (repère).
-- [ ] `References:` : une courte proposition par média, dans l'ordre des médias ; une tenue sans image décrite en mots.
-- [ ] Plan 1 : il ouvre sur l'accroche choisie (`references/hooks.md#Du hook au premier plan`), en mouvement dès la première image.
-- [ ] Chaque plan : `Shot N (a-bs)`, l'endroit s'il a sa vue, une action principale avec son arrivée, une émotion nommée et jouable, sa réaction quand quelque chose arrive à quelqu'un.
-- [ ] Chaque personnage présenté une fois en 2 à 4 mots visibles, ensuite par son prénom.
+- [ ] Cinq parties seulement : ouverture, `References:`, le plan du cut, ligne de son, `No subtitles, no text.` ; environ 150 à 220 mots (repère, pas règle).
+- [ ] `References:` : une courte proposition par média du cut, dans l'ordre des médias ; une tenue sans image décrite en mots ; l'extrait de voix, s'il y en a un, avec la phrase de `references/script.md#Version prompt`.
+- [ ] Cut 1 : il ouvre sur l'accroche choisie (`references/hooks.md#Du hook au premier plan`), en mouvement dès la première image.
+- [ ] Le plan : `Shot (0-<durée prévue>s)`, l'endroit avec sa vue, le début qui reprend la fin du cut d'avant, une action principale avec son arrivée, une émotion nommée et jouable, sa réaction quand quelque chose arrive à quelqu'un.
+- [ ] Chaque personnage présenté en 2 à 4 mots visibles, les mêmes dans chaque cut où il paraît.
 - [ ] Chaque réplique : `says to <who> in French, <intention>: "…"`, sans le mot « accent », sans description de voix ni de bouche ; elle tient dans sa fenêtre de parole (`mots ÷ 3` secondes).
-- [ ] Le dernier plan bouge jusqu'à la fin ; la dernière réplique finit au moins 1 s avant.
-- [ ] Le son en une ligne, sources présentes dans l'image, musique seulement si elle va au lieu ; ni voix off non demandée, ni effet.
-- [ ] Effort, terrain ou météo : l'état du corps dans la phrase du plan, sans recul d'un plan à l'autre (`## Physique de la situation`).
+- [ ] Le cut bouge jusqu'à la fin ; sa réplique finit avant la fin prévue.
+- [ ] Le son en une ligne : l'ambiance du lieu, mot pour mot celle des autres cuts du même lieu, sources présentes dans l'image ; ni musique, ni voix off non demandée, ni effet.
+- [ ] Effort, terrain ou météo : l'état du corps dans la phrase du plan, sans recul d'un cut à l'autre (`## Physique de la situation`).
 - [ ] `references/mise-en-scene.md#Auto-contrôle` coché ; aucun mot de `references/anti-slop.md#Mots interdits dans les prompts` ; chaque réplique passe `references/anti-slop.md#Tics d'écriture à bannir (répliques)`.

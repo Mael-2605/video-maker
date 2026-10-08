@@ -1,6 +1,6 @@
 ---
 name: atelier-images
-description: "Sous-agent du skill video-maker. Génère et range les images de l'inventaire (planches, tenues, lieux, objets, planche commune) et les vues du lieu vide, gère les échecs. Payant, seulement après l'annonce du prix. Appelé seulement par le skill video-maker."
+description: "Sous-agent du skill video-maker. Génère et range les images de l'inventaire (planches, tenues, image de base de chaque lieu en plan large, objets, planche commune) et les vues du lieu vide, faites depuis l'image de base, gère les échecs. Payant, seulement après l'annonce du prix. Appelé seulement par le skill video-maker."
 ---
 
 # Atelier images
@@ -27,7 +27,7 @@ Chemin d'une référence : `${CLAUDE_PLUGIN_ROOT}/skills/video-maker/references/
 - `references/fiche-personnage.md` (planche, `## Tenues`), `references/fiche-objet.md`, `references/fiche-lieu.md` : seulement les types à faire ; `templates/fiche-element.md` ; `## Carte` de `vision.md` pour la lumière du lieu.
 - `references/choix-modele.md#Vérification en début de session`, `#Modèles image`, `#Duel`, `#Échec technique d'une image`, `#Limite de références`.
 - `references/anti-slop.md#Mots interdits dans les prompts`, `#Relecture avant de montrer` ; `references/cout.md#Avant` et `#Pendant` ; `references/apprentissage.md#Format des lignes`.
-- Consigne `Vues du lieu` : `references/vues-lieu.md` (`#Principe`, `#Préparer la base`, `#Prompt d'une vue`, `#Relecture`, `#Enregistrement`), `## Vues du lieu` du `script.md` donné, et les identifiants du lieu (`## Jobs payants` de `etat.md`, `## Identifiants Higgsfield` de sa fiche).
+- Consigne `Vues du lieu` : `references/vues-lieu.md` (`#Principe`, `#Image de base`, `#Prompt d'une vue`, `#Relecture`, `#Enregistrement`), `## Vues du lieu` du `script.md` donné, et les identifiants du lieu (`## Jobs payants` de `etat.md`, `## Identifiants Higgsfield` de sa fiche).
 
 ## Outils Higgsfield
 
@@ -50,7 +50,7 @@ Règle des jobs déjà soumis, avant chaque lot : lis `## Jobs payants`. Un él�
 9. Plafond : avant chaque soumission, dépense faite + prix de la soumission ≤ `Plafond`. Sinon, rien n'est soumis : retour `PLAFOND`.
 10. Chaque image qui passe : fiche créée ou mise à jour depuis `templates/fiche-element.md` (`## Enregistrement` de sa fiche ; tenues dans la fiche du personnage), ligne `element-cree` au journal, statut `pret` dans `## Inventaire` de `vision.md` (`bloque` pour un élément bloqué).
 11. Après chaque lot : `balance`, une ligne dans `cout.md` (poste `images`, `references/cout.md#Pendant`).
-12. Consigne `Vues du lieu` (les points 1, 5, 9 et 11 valent aussi) : d'abord la base, gratuite (`references/vues-lieu.md#Préparer la base` : panneaux de la fiche du lieu, sinon planche découpée, envoyée par `media_upload` puis `media_confirm`, media ids dans `bases du lieu (media ids):` et dans la fiche). Puis, pour chaque vue de `Vues`, le bloc `### Vue <N>` de `## Vues du lieu` du `script.md`, prompt envoyé tel quel ; ses références, dans l'ordre du bloc, en `image_references` (media id ou job id, jamais une URL). Un seul `generate_image_batch`, `{model:"nano_banana_pro", prompt, aspect_ratio:"9:16", resolution:"2k", medias}` par vue. Juste après la soumission, chaque job id dans `vues du lieu (job ids):` (`vue<N>=<job id>`), puis `jobs_wait`. Relecture : `references/vues-lieu.md#Relecture` ; une personne visible, un collage ou des panneaux, une lumière d'une autre chaleur ou un reflet inventé est un échec. Échec : même chaîne que le point 5 (relance muette, duel muet contre `gpt_image_2_5`, puis `BLOQUÉ` : la `PHRASE` propose de simplifier cette vue). Ni fiche ni ligne de journal pour la vue : elle sert à ce seul projet. `Duel : oui` sur une vue : deux rendus, même prompt, rien n'est rangé.
+12. Consigne `Vues du lieu` (les points 1, 5, 9 et 11 valent aussi) : la base est l'image de base du lieu (`references/vues-lieu.md#Image de base`) ; si `bases du lieu (job ids):` de `etat.md` ne l'a pas, l'y écrire (`<slug>=<job id>`). Aucune découpe, aucun envoi. Puis, pour chaque vue de `Vues`, le bloc `### Vue <N>` de `## Vues du lieu` du `script.md`, prompt envoyé tel quel, l'image de base seule en `image_references` (job id, jamais une URL). Un seul `generate_image_batch`, `{model:"nano_banana_pro", prompt, aspect_ratio:"9:16", resolution:"2k", medias}` par vue. Juste après la soumission, chaque job id dans `vues du lieu (job ids):` (`vue<N>=<job id>`), puis `jobs_wait`. Relecture : `references/vues-lieu.md#Relecture` ; une personne visible, un collage ou des panneaux, une lumière d'une autre chaleur ou un reflet inventé est un échec. Échec : même chaîne que le point 5 (relance muette, duel muet contre `gpt_image_2_5`, puis `BLOQUÉ` : la `PHRASE` propose de simplifier cette vue). Ni fiche ni ligne de journal pour la vue : elle sert à ce seul projet. `Duel : oui` sur une vue : deux rendus, même prompt, rien n'est rangé.
 
 ## Retour
 

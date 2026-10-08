@@ -1,13 +1,15 @@
 # Mise en scène
 
-> Rôle : la méthode du réalisateur avant d'écrire un seul plan. Le look, la lumière et la cohérence d'image tiennent déjà ; ce qui trahit l'IA, c'est la logique : une action sans cause, un objet dans un état impossible, un trajet qui va au mauvais endroit, un personnage qui ne réagit pas, une réplique qu'aucun humain ne dirait. Tout ce travail reste en coulisse, rangé dans `script.md` ; le client ne voit que le découpage (`references/script.md#Découpage`).
+> Rôle : la méthode du réalisateur avant d'écrire un seul plan. Le look, la lumière et la cohérence d'image tiennent déjà ; ce qui trahit l'IA, c'est la logique : une action sans cause, un objet dans un état impossible, un trajet qui va au mauvais endroit, un personnage qui ne réagit pas, une réplique qu'aucun humain ne dirait. Tout ce travail reste en coulisse, rangé dans `script.md` ; le client ne voit que la trame (`references/script.md#Trame`).
 > Jeu et voix : `references/jeu.md`. Plans et prompt : `references/script.md`. Vues du lieu : `references/vues-lieu.md`.
 
 ## Principe
 
 Un plan sans fonction narrative est supprimé, pas amélioré. Chaque plan répond à une question : qu'est-ce que le spectateur comprend maintenant qu'il ne comprenait pas une seconde avant ? C'est la ligne `Pourquoi :` du plan (`references/script.md#Plans`).
 
-Ordre de travail, toujours le même, même pour une idée simple : beats, plan du lieu, registre des objets et du son, blocking, répliques, auto-contrôle. Le prompt s'écrit ensuite, court (`references/script.md#Version prompt`) : il ne garde que le résultat de ce travail, qui fait quoi, où, vers quoi (`## Dans le prompt`).
+Ordre de travail, toujours le même, même pour une idée simple : beats, plan du lieu, registre des objets et du son, blocking, répliques, auto-contrôle. Le prompt de chaque cut s'écrit ensuite, court (`references/script.md#Version prompt`) : il ne garde que le résultat de ce travail, qui fait quoi, où, vers quoi (`## Dans le prompt`).
+
+La mise en scène couvre toute la trame : chaque cut est généré seul, la continuité d'un cut à l'autre ne vient que d'elle.
 
 ## Beats
 
@@ -24,7 +26,7 @@ La géographie se fixe avant les plans et ne bouge plus, comme une carte qu'un i
 - **Positions** : chaque élément clé (comptoir, porte, fenêtre, tables, terrasse, bureau) et chaque personnage, en repères stables : mur gauche ou droit, avant ou fond, côté rue ou côté cour.
 - **Règle d'orientation**, en une phrase valable dans tous les plans : où est la caméra par rapport à l'axe principal du lieu, et de quel côté du cadre on va vers la sortie. Exemple : « Caméra côté salle, comptoir à gauche, porte vitrée au fond à droite : sortir, c'est aller vers la droite du cadre. »
 - **Trajets** : toujours `point de départ → direction → repère d'arrivée`. Le repère d'arrivée (porte, table, personne) est dans le cadre, du côté où va le personnage. Personne ne se tient sur la trajectoire d'un autre, sauf si c'est sa destination : sinon le modèle comprend que l'objet va vers lui.
-- Les positions de caméra des plans donnent les vues du lieu à faire, une par position (`references/vues-lieu.md#Prompt d'une vue`).
+- Les positions de caméra des cuts donnent les vues du lieu à faire, une par position (`references/vues-lieu.md#Prompt d'une vue`).
 
 ## Registre des objets et du son
 
@@ -84,9 +86,9 @@ Un plan calme sans objet ni second personnage : `Immobiles : personne.` et `Obje
 
 ## Dans le prompt
 
-Beats, plan du lieu, registre et blocking restent dans `script.md`. Le prompt n'en garde que le résultat, en quelques mots par plan (`references/script.md#Un plan`) :
+Beats, plan du lieu, registre et blocking restent dans `script.md`. Le prompt n'en garde que le résultat, en quelques mots (`references/script.md#Le plan du cut`) :
 
-- **Où** : le plan qui a sa vue la cite en tête (`the counter as in @Image 7`) ; l'ouverture donne le lieu en une proposition qui porte déjà l'orientation utile (`a large shopfront window opening onto a sunny terrace`). Pas de phrase de géographie à part.
+- **Où** : le plan du cut cite sa vue (`the counter as in @Image 5`) ; l'ouverture donne le lieu en une proposition qui porte déjà l'orientation utile (`a large shopfront window opening onto a sunny terrace`). Pas de phrase de géographie à part.
 - **Qui va où** : chaque trajet nomme son arrivée (`walks back to her small table by the window and sits down`, `crosses the terrace and sets the spritz in front of the man`). Un immobile n'est écrit que s'il risque de bouger (`the man stays seated at his table`).
 - **Objets** : leur état n'est écrit que s'il rend l'action possible (`taps her card on the payment terminal`). Une remise d'objet se fait sur une coupe.
 - **Réactions** : nommées, dans le plan ou le suivant (`He looks up, surprised.`).
@@ -95,17 +97,17 @@ Beats, plan du lieu, registre et blocking restent dans `script.md`. Le prompt n'
 
 ## Auto-contrôle
 
-Avant de rendre le découpage, cocher chaque point ; un point manque, corriger d'abord.
+Avant de rendre la trame, cocher chaque point ; un point manque, corriger d'abord.
 
 - [ ] Toutes les actions demandées sont là ; aucune supprimée en silence ; si elles ne tiennent pas, la `PHRASE` propose une durée plus longue.
 - [ ] Chaque beat a une cause et une conséquence visibles (test du spectateur muet).
 - [ ] Chaque événement dirigé vers quelqu'un a sa réaction, en micro-actions dans l'ordre.
-- [ ] Fin du plan N = début du plan N+1 : position, objet, main, regard.
 - [ ] Aucun objet dans un état incompatible avec son usage ; chaque son a une source visible et active.
 - [ ] Chaque trajet a un repère d'arrivée visible et va dans le sens de la règle d'orientation ; personne sur la trajectoire d'un autre sans raison.
 - [ ] Un personnage moteur, un mouvement de caméra au plus, une pose finale écrite, par plan.
 - [ ] Les répliques sonnent dites et non écrites ; environ 6 mots à l'écran, sauf demande qui exige plus ; chacune tient dans sa fenêtre de parole (`mots ÷ 3` secondes).
-- [ ] La somme des durées des plans = la durée annoncée.
+- [ ] La somme des durées prévues des cuts = la durée annoncée.
+- [ ] Le début écrit de chaque cut = la fin du cut précédent (position, objet, main, regard).
 
 ## Exemple — le verre offert
 

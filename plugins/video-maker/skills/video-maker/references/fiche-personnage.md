@@ -23,7 +23,7 @@ La planche ne fixe que l'identité : visage, cheveux, corps, peau, marques. Le p
 
 ## Template du prompt
 
-En anglais, un seul bloc, sections dans cet ordre. `Subject` et `Base outfit` sont écrits une fois, puis figés : ils sont recopiés mot pour mot dans la fiche (`## Description figée`) et dans les corrections et duels de la planche. `Subject` seul est aussi recopié dans chaque image de tenue (`## Tenues`). La vidéo n'en reprend que 2 à 4 mots visibles (`Clara, a young brunette woman`) : le visage vient de la planche (`references/script.md#Un plan`). `Base outfit` ne sert qu'à la planche.
+En anglais, un seul bloc, sections dans cet ordre. `Subject` et `Base outfit` sont écrits une fois, puis figés : ils sont recopiés mot pour mot dans la fiche (`## Description figée`) et dans les corrections et duels de la planche. `Subject` seul est aussi recopié dans chaque image de tenue (`## Tenues`). La vidéo n'en reprend que 2 à 4 mots visibles (`Clara, a young brunette woman`) : le visage vient de la planche (`references/script.md#Le plan du cut`). `Base outfit` ne sert qu'à la planche.
 
 `Subject` décrit l'identité seule : jamais d'expression, de pose ni d'humeur (« neutral », « smiling », « confident »). L'expression de la planche est écrite dans `Layout` ; celle de la vidéo vient des plans (`references/jeu.md#Jouer une intention`).
 
@@ -120,10 +120,10 @@ Relecture avant de montrer, en plus de `references/anti-slop.md#Relecture avant 
 
 ## Voix
 
-Aucune voix à choisir, aucun extrait à payer. Seedance crée la voix en même temps que l'image, à partir du personnage qu'il voit et de la réplique écrite dans le prompt (`references/jeu.md#La réplique dans le plan`). Les tests du 2026-10-02/03 ont donné un français plus naturel ainsi qu'avec un extrait de voix joint.
+Aucune voix à choisir, aucun extrait à payer à part. Seedance crée la voix avec l'image, à partir du personnage qu'il voit et de la réplique du prompt (`references/jeu.md#La réplique dans le plan`). Pour qu'elle ne change pas d'un cut à l'autre, la voix d'un premier cut gardé où il parle seul est extraite et jointe aux cuts suivants (`references/montage.md#Extraire une voix`) : c'est la voix que la vidéo a elle-même produite, pas une voix de synthèse.
 
-- Le client veut une voix particulière (« plus grave », « plus jeune ») : deux ou trois mots dans la présentation du personnage, au premier plan où il parle (`Jeff, a man in his forties with a deep, calm voice`). Jamais le mot « accent », jamais de consigne sur la bouche ni sur le débit.
-- Film en segments : ces mots de voix sont identiques dans chaque segment (`references/script.md#Segments`).
+- Le client veut une voix particulière (« plus grave », « plus jeune ») : deux ou trois mots dans la présentation du personnage, au premier cut où il parle (`Jeff, a man in his forties with a deep, calm voice`). Jamais le mot « accent », jamais de consigne sur la bouche ni sur le débit.
+- Personnage qui parle dans plusieurs cuts sans cut où il parle seul : ces mots de voix sont identiques dans chaque cut où il parle.
 - Fiche plus ancienne avec une voix, un `voice_id` ou un extrait : gardés tels quels dans la fiche, jamais utilisés.
 
 ## Modèle et appel
@@ -161,7 +161,7 @@ Déduites par le concepteur pour l'inventaire, générées par l'atelier. La pla
 4. Lire `## Tenues` dans la fiche du personnage. Une tenue rangée dont les pièces correspondent est reprise telle quelle, rien à payer. Les autres sont nouvelles.
 5. Garder la vidéo à 9 images au plus : `references/choix-modele.md#Limite de références`. Au-delà, la tenue la plus simple d'un personnage secondaire n'a pas d'image : elle est décrite en mots dans la vidéo, et la ligne `Je fixe` la nomme sans prix.
 
-La vidéo combine la planche (visage) et l'image de tenue sans tête (corps et vêtements) : combinaison validée au test réel du 2026-10-03. Si le visage dérive, voir SKILL.md, `## Moment 3 — Vidéo livrée`.
+La vidéo combine la planche (visage) et l'image de tenue sans tête (corps et vêtements) : combinaison validée au test réel du 2026-10-03. Si le visage dérive, voir SKILL.md, `## Moment 3 — Boucle par cut`.
 
 Tenue au choix du skill, accordée au lieu (pas de costume trois pièces dans un bar de quartier). Le client la lit dans la ligne `Je fixe` : « deux tenues de Jeff : chemise en lin ouverte, puis torse nu en short de bain ».
 

@@ -4,7 +4,7 @@ Ce plugin Claude Code crée des vidéos courtes et verticales pour les réseaux 
 
 ## Ce que fait l'outil
 
-Vous décrivez votre vidéo et l'outil vous répond en trois moments. D'abord une courte vision : le style, ce qu'il va fixer en image (personnages, tenues, lieu, objets) avec le prix, et trois versions de la vidéo au choix, chacune racontée en quelques phrases, du début à la fin. Ensuite les images et le découpage plan par plan, avec le prix de la vidéo : rien n'est lancé sans votre « oui ». Enfin la vidéo, que vous gardez ou faites corriger, puis les sous-titres. Une vidéo fait 15 secondes par défaut ; au-delà de 30 secondes, l'outil la tourne en plusieurs parties et les assemble lui-même.
+Vous décrivez votre vidéo et l'outil vous répond en quatre moments. D'abord une courte vision : le style, ce qu'il va fixer en image (personnages, tenues, lieu, objets) avec le prix, et trois versions de la vidéo au choix, chacune racontée en quelques phrases. Ensuite les images et la trame, un cut par ligne, avec le prix de toute la vidéo : rien n'est lancé sans votre « oui ». Puis les cuts arrivent un par un : vous gardez chacun, ou le faites corriger avant de passer au suivant. Enfin la vidéo montée, que vous gardez ou faites corriger, puis les sous-titres. Une vidéo fait 15 secondes par défaut.
 
 ## Installation
 
@@ -42,15 +42,27 @@ Claude installe la dernière version, ou vous dit que vous l'avez déjà. Après
 
 Pour ne plus y penser : tapez `/plugin`, ouvrez l'onglet des marketplaces, choisissez `video-maker-marketplace` et activez la mise à jour automatique. Claude vérifie alors à chaque démarrage.
 
+### 5. Garder l'ancienne version (vidéo entière d'un coup)
+
+La version 0.6.0 tourne la vidéo entière en une fois, sans passer par les cuts. Elle ne reçoit plus d'évolution, mais reste installable. Dans l'onglet Code, tapez ces trois commandes l'une après l'autre :
+
+```
+/plugin marketplace remove video-maker-marketplace
+/plugin marketplace add Mael-2605/video-maker#video-entiere
+/plugin install video-maker@video-maker-marketplace
+```
+
+La première commande retire la version actuelle ; vos personnages, lieux, projets et préférences ne bougent pas. Fermez puis rouvrez Claude. Pour revenir à la version cut par cut, refaites les mêmes commandes sans `#video-entiere`.
+
 ## Utilisation
 
 Il suffit de demander, par exemple :
 
 > Fais-moi une vidéo avec Jeff, un barman, qui présente le nouveau cocktail de la maison.
 
-Répondez à la vision en choisissant une accroche, ou dites ce qu'il faut changer. Au deuxième moment, vous voyez les images des personnages, de leurs tenues, des objets et du lieu vu de plusieurs endroits, puis le découpage, une phrase par plan qui dit ce qui s'y passe ; dites « oui » pour lancer la vidéo, ou demandez une seule modification à la fois. Il n'y a rien à régler avant la première vidéo. L'outil vous vouvoie ; si vous le tutoyez, il vous tutoie.
+Répondez à la vision en choisissant une accroche, ou dites ce qu'il faut changer. Au deuxième moment, vous voyez le lieu pris de loin, puis vu de plusieurs endroits, les personnages, leurs tenues et les objets, puis la trame, une ligne par cut ; dites « oui » pour lancer le premier cut. Chaque cut arrive ensuite seul : « on garde » lance le suivant, ou demandez une seule modification à la fois. Il n'y a rien à régler avant la première vidéo. L'outil vous vouvoie ; si vous le tutoyez, il vous tutoie.
 
-Il n'y a pas de voix à choisir : la voix vient avec la vidéo, en français. Si elle ne vous va pas (« plus grave », « plus jeune »), dites-le après la vidéo et l'outil la corrige.
+Il n'y a pas de voix à choisir : la voix vient avec la vidéo, en français, et reste la même d'un cut à l'autre. Si elle ne vous va pas (« plus grave », « plus jeune »), dites-le après la vidéo et l'outil la corrige.
 
 Les personnages, lieux et objets déjà créés sont repris tels quels dans les vidéos suivantes. Si un personnage ou une tenue manque, l'outil les prépare avant la vidéo.
 
@@ -62,7 +74,7 @@ Vous pouvez ouvrir et modifier ce fichier à tout moment.
 
 ## Coûts
 
-Les images sont annoncées avec leur prix dans la vision et lancées quand vous répondez. La vidéo, même en plusieurs parties, a un seul prix et attend votre « oui ».
+Les images sont annoncées avec leur prix dans la vision et lancées quand vous répondez. La vidéo a un prix global, annoncé avec la trame, qui couvre tous les cuts ; il attend votre « oui ». Refaire un cut a son propre prix, annoncé avant, et attend aussi votre « oui ».
 
 ## En cas de souci
 

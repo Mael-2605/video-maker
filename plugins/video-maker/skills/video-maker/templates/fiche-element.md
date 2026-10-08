@@ -12,7 +12,6 @@ Créé le : AAAA-MM-JJ
 
 ## Identifiants Higgsfield
 Image validée (job id) :
-Panneaux (media ids, lieux seulement) :
 Element id :
 
 ## Historique

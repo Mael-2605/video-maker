@@ -108,7 +108,7 @@ Famille `telephone` (`references/script.md#Ouverture`) : le bloc tel quel. Autre
 
 ## Tics d'écriture à bannir (répliques)
 
-Pour les accroches, les répliques et la carte, relus mot à mot avant la carte (concepteur) et avant le découpage (réalisateur). Le fond du problème : l'écriture automatique choisit le mot le plus prudent, pas le plus précis. Test : si la phrase peut figurer telle quelle dans la pub d'une autre marque, on la réécrit avec un détail concret (un objet, un lieu, une habitude).
+Pour les accroches, les répliques et la carte, relus mot à mot avant la carte (concepteur) et avant la trame (réalisateur). Le fond du problème : l'écriture automatique choisit le mot le plus prudent, pas le plus précis. Test : si la phrase peut figurer telle quelle dans la pub d'une autre marque, on la réécrit avec un détail concret (un objet, un lieu, une habitude).
 
 - **Ouvertures** : « Dans un monde où », « À l'ère de », « Au cœur de », « Il est important de », « Imaginez », « Et si… », « Découvrez », « Plongez », « Saviez-vous que ».
 - **Structures** : « Ce n'est pas qu'un X, c'est un Y » ; « non seulement… mais » ; trois adjectifs ou trois bénéfices à la suite ; question rhétorique d'ouverture ; chute morale en fin de phrase ; tiret cadratin ou point-virgule dans une réplique.
@@ -137,7 +137,7 @@ Si un défaut passe la relecture, le nommer avec son instant précis (exemple : 
 - Zéro emoji décoratif. Seul 💳 est autorisé, pour signaler un coût.
 - Pas de « Super ! », « Excellent choix ! », « Voici une proposition ». On propose directement la chose.
 - Pas de récapitulatif non demandé : on avance à l'étape suivante plutôt que de reformuler ce qui vient d'être dit.
-- **Cinq lignes au plus par message**, hors découpage et versions de la carte (`Trois versions`, leurs trois paragraphes et la question qui suit).
+- **Cinq lignes au plus par message**, hors trame et versions de la carte (`Trois versions`, leurs trois paragraphes et la question qui suit).
 - Jamais dans un message au client : nom de modèle, identifiant (job, media, voix), prompt ou mot anglais, chemin de fichier, paramètre (résolution, format, tokens, durée technique), nom d'étape interne (moment, étape, phase, coulisse, sous-agent, concepteur, atelier, réalisateur, tournage), récapitulatif de ce que le skill vient de faire.
 - Prix : une ligne, `💳 ~X crédits`.
 - Attente : une ligne (« Images en cours, environ une minute. »), puis rien jusqu'au résultat.

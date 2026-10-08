@@ -1,32 +1,32 @@
 ---
 name: video-maker
-description: "Crée une vidéo verticale courte pour les réseaux (reel, TikTok, LinkedIn) avec un personnage IA hyper réaliste qui parle français, via Higgsfield. À utiliser dès que l'utilisateur veut une vidéo, un reel, un TikTok, une pub, ou parle d'un personnage (« Jeff ») à mettre en scène. Trois moments : vision, images et découpage, vidéo livrée."
+description: "Crée une vidéo verticale courte pour les réseaux (reel, TikTok, LinkedIn) avec un personnage IA hyper réaliste qui parle français, via Higgsfield. À utiliser dès que l'utilisateur veut une vidéo, un reel, un TikTok, une pub, ou parle d'un personnage (« Jeff ») à mettre en scène. Quatre moments : carte vision, trame, cuts un par un, vidéo montée."
 ---
 
 # Vidéo promo
 
 Une vidéo verticale pour les réseaux, sur le sujet que donne le client. Le skill n'apporte aucun savoir métier : le sujet vient toujours de la demande.
-Le client n'intervient qu'à trois moments : la vision, les images avec le découpage, la vidéo livrée.
+Le client intervient à quatre moments : la carte vision, la trame, chaque cut, la vidéo montée.
 Tout le reste se fait en coulisse, par quatre sous-agents (`## Sous-agents`).
 Ce fichier dit **quand** et **dans quel ordre**. Le **comment** est dans `references/` et dans les fichiers des sous-agents : on ne lit une référence qu'au moment où elle est citée.
 
 ## Principes
 
-- Messages : `references/anti-slop.md#Ton du skill` (cinq lignes au plus, hors découpage et versions de la carte ; ni modèle, ni identifiant, ni prompt, ni chemin, ni paramètre, ni anglais, ni nom d'étape interne, ni récapitulatif). Une seule question à la fois.
-- Le client n'intervient qu'aux trois moments. Rien du travail de coulisse ne s'affiche : ni retour de sous-agent, ni fichier, ni appel.
+- Messages : `references/anti-slop.md#Ton du skill` (cinq lignes au plus, hors trame et versions de la carte ; ni modèle, ni identifiant, ni prompt, ni chemin, ni paramètre, ni anglais, ni nom d'étape interne, ni récapitulatif). Une seule question à la fois.
+- Le client n'intervient qu'aux quatre moments. Rien du travail de coulisse ne s'affiche : ni retour de sous-agent, ni fichier, ni appel.
 - Dire ce qu'on fait, puis ce qu'on attend. Pas de compliment.
 - Vouvoiement par défaut. Si le client tutoie, passer au tutoiement pour la suite de la conversation. Aucune question sur le ton.
 - Tu ou vous dans les accroches et la réplique : la forme de la demande quand elle en donne une (« t'as goûté le nouveau menu ? »), sinon celle que le client emploie avec le skill.
 - Le client ne choisit jamais le modèle. Ne jamais nommer un modèle, sauf s'il le demande (alors une phrase, sans comparaison).
 - Aucune mention « généré par IA » dans le flow : le client la coche lui-même à la publication.
-- Conformité : chaque texte produit (accroche, réplique, découpage, texte fourni par le client) passe par `references/conformite.md` avant d'être montré ou mis dans un prompt. Les sous-agents l'appliquent ; l'agent principal ne montre rien qui ne l'ait pas passée.
+- Conformité : chaque texte produit (accroche, réplique, trame, texte fourni par le client) passe par `references/conformite.md` avant d'être montré ou mis dans un prompt. Les sous-agents l'appliquent ; l'agent principal ne montre rien qui ne l'ait pas passée.
 - **Règle de slug** (une seule pour tout le skill et les fiches) : personnage = le **prénom seul** ; lieu ou objet = le **nom complet** ; normalisé : minuscules, accents retirés, tout caractère autre qu'une lettre ou un chiffre remplacé par un tiret. « Jeff le barman » → `jeff`, « Émilie » → `emilie`, « bar du Rhône » → `bar-du-rhone`. Recherche d'un élément existant (identique ou proche) : `references/fiche-personnage.md#Dans l'inventaire`.
 - Une référence n'est chargée qu'au moment qui la cite. Ne pas tout lire d'avance.
 - Outils Higgsfield appelés par leur nom court (`balance`, `show_generation_by_ids`…).
 - Photos sur l'ordinateur du client (inspiration, son bureau, un objet) : appeler `media_upload_widget`, **seul outil de ce tour**, avant toute génération. Jamais de chemin local. On reprend après l'envoi, avec les media id.
-- Argent : voir `## Règle d'argent`. Aucune vidéo sans prix affiché et « oui » explicite.
+- Argent : voir `## Règle d'argent`. Aucun cut sans prix affiché et « oui » explicite (celui de la trame vaut pour tous ses cuts).
 - Mémoire : `bibliotheque/preferences.md` est lu au démarrage. `bibliotheque/journal.md` reçoit une ligne par décision (format : `references/apprentissage.md#Format des lignes`) et n'est jamais lu en entier.
-- État du projet : `etape:` = dernière étape terminée (0 à 7, ou `abandon`), voir `templates/projet-etat.md`. L'agent principal tient `etat.md`, sauf `## Jobs payants` et `cout.md`, écrits par le sous-agent qui paie. Deux exceptions où l'agent principal écrit dans `## Jobs payants` : le job id gardé après un duel « A ou B ? » (`## Moment 2`, point 5), et les lignes vidéo vidées avant une nouvelle vidéo (`## Moment 3`, point 3).
+- État du projet : `etape:` = dernière étape terminée (0 à 7, ou `abandon`), voir `templates/projet-etat.md`. L'agent principal tient `etat.md`, sauf `## Jobs payants`, `## Voix`, les colonnes `brouillon` et `final` de `## Cuts` (statuts `brouillon` et `final` compris) et `cout.md`, écrits par le sous-agent qui paie. L'agent principal écrit les lignes de `## Cuts` et le statut `gardé`. Exceptions : le job id gardé après un duel « A ou B ? » (`## Moment 2 — Trame`) ; la colonne `final` vidée avant un nouvel essai d'un cut gardé ou final (`## Moment 3 — Boucle par cut`, `## Moment 4 — Vidéo montée`), avec `montage (media id):` s'il est rempli ; les colonnes `brouillon` et `final` vidées d'un cut dont le brouillon a plus de sept jours (`## Démarrage`, point 4 ; `## Moment 3 — Boucle par cut`, point 8) ; `montage (media id): échec` après un montage en échec, vidé juste avant le nouvel appel `monter` (`## Coulisse — Montage`). Une voix de `## Voix` n'est remplacée que par une nouvelle consigne `extraire voix`.
 - Dossiers de la bibliothèque (`personnages/`, `lieux/`, `objets/`, `projets/`) : lister **les noms de dossiers seulement**. On n'ouvre une fiche qu'une fois l'élément choisi.
 
 ## Démarrage
@@ -61,17 +61,18 @@ Reprise à l'étape `etape + 1`, en relisant seulement `etat.md`, `vision.md`, `
 
 | `etape:` | On reprend à |
 |---|---|
-| 0 | `## Moment 1 — Vision` |
+| 0 | `## Moment 1 — Carte vision` |
 | 1 | `## Coulisse — Images` |
-| 2 | `## Moment 2 — Images et découpage` |
-| 3 | `## Coulisse — Tournage` (voir plus bas) |
-| 4 | `## Moment 3 — Vidéo livrée` |
+| 2 | `## Moment 2 — Trame` |
+| 3 | `## Moment 3 — Boucle par cut`, au premier cut qui n'est pas `final` ni `gardé` (`à faire` ou `brouillon`) |
+| 4 | `## Moment 4 — Vidéo montée` |
 | 5 | `## Sous-titres` |
 | 6 | `## Bilan` |
 
-- Job id dans `## Jobs payants` dont le résultat n'a pas été montré : **d'abord vérifier ce job**, avec `jobs_wait` seulement (rien n'est montré au client hors des trois moments). Terminé → reprendre avec ce résultat, sans rien repayer : le sous-agent qui paie le reprend lui aussi au lieu de le soumettre à nouveau. En cours → attendre. Seulement s'il est connu comme échoué : nouveau prix, et nouveau « oui » s'il s'agit d'une vidéo (`## Règle d'argent`).
-- `etape: 3` sans job vidéo : le « oui » d'une conversation précédente ne vaut plus. Redemander le réalisateur pour le prix et réafficher le moment 2 (découpage et ligne de prix).
-- Hors de ces cas, un « oui » donné dans une conversation précédente ne vaut plus : toute dépense repart d'un nouveau prix et, pour une vidéo, d'un nouveau « oui ».
+- Jobs de `## Jobs payants` ou de `## Cuts` dont le résultat n'a pas été montré : **d'abord les vérifier**, avec `jobs_wait` seulement. Terminé → reprendre avec ce résultat, sans rien repayer ; le tournage les reprend lui aussi au lieu de les soumettre à nouveau. En cours → attendre. Connu comme échoué → nouveau prix, nouveau « oui ».
+- `etape: 3` : d'abord ce qui est repris sans payer. Âge d'un brouillon : la date écrite avec son job dans la colonne `brouillon` (`v<k>=<job id> (<AAAA-MM-JJ>)`). Un cut `brouillon` dont le job est terminé et a sept jours au plus est montré tel quel (`## Moment 3 — Boucle par cut`, point 2). Un cut `gardé` dont la finalisation a un job : repris par le tournage, sans prix. Aucun cut `à faire` ni `brouillon` (tous `gardé` ou `final`, une finalisation peut-être en cours), aucun cut `gardé` sans finalisation dont le brouillon a plus de sept jours, et `montage (media id):` vide : `## Coulisse — Montage` directement, sans question (le tournage attend les finalisations en cours ; le montage est compris dans le prix de la trame). `montage (media id): échec` : `## Coulisse — Montage`, point 3 (prix et « oui » avant tout nouvel appel).
+- Ensuite seulement, et avant tout appel payant (celui du point 3 du moment 3 après un « on garde » compris), s'il reste quelque chose à payer (finalisations sans job, cuts `à faire`, un nouveau brouillon pour chaque cut `brouillon` ou `gardé` sans finalisation dont le brouillon a plus de sept jours, sa finalisation comptant déjà parmi les finalisations sans job) : prix lu dans les lignes `Prix :` de `script.md` (réalisateur sans `Correction` pour un `get_cost` à jour), puis `Si oui, je continue : 💳 ~<X> crédits pour la suite.` « Oui » : `montant autorise:` augmenté de X ; chaque cut au brouillon de plus de sept jours : colonnes `brouillon` et `final` vidées, statut `à faire` (le tournage ne reprend jamais ce brouillon). Rien n'est payé sur l'accord de la conversation précédente : son « oui » ne vaut plus. Rien à payer : pas de ligne de prix.
+- `etape: 2` avec un `script.md` : réalisateur sans `Correction`, puis réafficher le moment 2.
 
 **5. Nouveau projet.**
 - Slug : `AAAA-MM-JJ-<3 mots>` (date du jour, trois mots de la demande, normalisés selon la règle de slug). Exemple : `2026-10-02-jeff-bar-menu`.
@@ -83,9 +84,9 @@ Reprise à l'étape `etape + 1`, en relisant seulement `etat.md`, `vision.md`, `
 | Sous-agent | `subagent_type` | Quand | Coût |
 |---|---|---|---|
 | concepteur | `video-maker:concepteur` | Moment 1 : carte, correction de carte, autres pistes | gratuit |
-| atelier-images | `video-maker:atelier-images` | Après le choix au moment 1 ; vues du lieu au moment 2 ; correction d'image, de vue ou élément nouveau | payant, prix déjà annoncé |
-| realisateur | `video-maker:realisateur` | Images prêtes ; correction d'un plan ; correction après la vidéo | gratuit |
-| tournage | `video-maker:tournage` | Après le « oui » du moment 2 ; sous-titres | payant, montant autorisé |
+| atelier-images | `video-maker:atelier-images` | Après le choix au moment 1 ; vues du lieu au moment 2 ; image corrigée ou nouvelle | payant, prix déjà annoncé |
+| realisateur | `video-maker:realisateur` | Images prêtes ; correction de la trame ou d'un cut | gratuit |
+| tournage | `video-maker:tournage` | Après chaque « oui » sur un cut ou la trame ; « on garde » ; montage ; sous-titres | payant, montant autorisé |
 
 - **Appel** : outil Agent, `subagent_type` ci-dessus, toujours avec `run_in_background: false` (l'outil lance sinon le sous-agent en arrière-plan) : attendre le retour avant de répondre au client. La consigne commence par les trois lignes communes, puis les champs de la section `## Consigne reçue` du sous-agent, un par ligne (`Champ : valeur`) :
   ```
@@ -93,14 +94,14 @@ Reprise à l'étape `etape + 1`, en relisant seulement `etat.md`, `vision.md`, `
   Dossier du skill : <dossier de base de ce skill>
   Projet : bibliotheque/projets/<slug>/
   ```
-- **Retour** : ne lire que les champs du format (`CARTE`, `INVENTAIRE`, `DÉCOUPAGE`, `PRIX`, `VUES DU LIEU`, `PHRASE`, `DÉFAUTS`, identifiants, dépense). Seuls le texte entre `CARTE` et `FIN CARTE`, celui entre `DÉCOUPAGE` et `FIN DÉCOUPAGE`, la `PHRASE` et les `DÉFAUTS` peuvent être montrés au client. Retour hors format : ne rien montrer, relire `vision.md` ou `script.md` et en tirer le texte.
+- **Retour** : ne lire que les champs du format (concepteur : `CARTE`, `VISION`, `INVENTAIRE`, `PRIX IMAGES`, `PRIX VUES DU LIEU`, `DUREE` ; réalisateur : `TRAME` / `FIN TRAME`, `PRIX`, `CUTS`, `SCRIPT`, `ROUTE`, `VUES DU LIEU`, `PHRASE` ; tournage : `CUT`, `DÉFAUTS`, `FINAL`, `VOIX`, `MONTAGE`, `SOUS-TITRES`, `ARRÊT` ; identifiants, dépense). Seuls le texte entre `CARTE` et `FIN CARTE`, celui entre `TRAME` et `FIN TRAME`, la `PHRASE` et les `DÉFAUTS` peuvent être montrés au client. Retour hors format : ne rien montrer, relire `vision.md` ou `script.md` et en tirer le texte.
 - **Repli** : retour `HIGGSFIELD_INDISPONIBLE`, outil Agent absent ou sous-agent inconnu → faire soi-même le travail décrit dans `${CLAUDE_PLUGIN_ROOT}/agents/<nom>.md` (consigne, lectures, travail, interdits), appels Higgsfield compris, avec les mêmes règles d'argent et de message.
 
-## Moment 1 — Vision
+## Moment 1 — Carte vision
 
 1. Photos locales dans la demande : `media_upload_widget`, seul outil du tour. On reprend avec les media id.
 2. Concepteur : `Demande` (mot pour mot), `Durée` (celle du client, sinon 15), `Photos` (media ids, s'il y en a).
-3. Écrire dans `etat.md` : `duree:` et `segments:` (lus sur `DUREE`), `vision:` (lu sur `VISION`). Afficher le texte de la carte tel quel : c'est le seul message de ce moment.
+3. Écrire dans `etat.md` : `duree:` (lu sur `DUREE`), `vision:` (lu sur `VISION`). Afficher le texte de la carte tel quel : c'est le seul message de ce moment.
 4. Le client change la carte : concepteur avec `Correction` (une seule modification ; plusieurs → l'une après l'autre) ; afficher la carte du retour telle quelle (lignes changées et nouveau prix). Autres pistes demandées : concepteur avec `Autres pistes: oui` ; afficher `Trois versions`, les paragraphes A à C et la question.
 5. Le client choisit (A, B ou C). L'accroche choisie porte `(+1 image : …)` : ajouter l'élément à `## Inventaire` de `vision.md` (statut `nouveau`, relevé dans `## Accroches`) et son prix au prix des images ; il est déjà annoncé, pas de question.
 6. Journal : ligne `hook` (`references/hooks.md#Ligne de journal`, codes de `## Accroches` de `vision.md`). `etat.md`, `## Choix validés`, tirés de `INVENTAIRE` et de l'élément d'accroche ajouté au point 5 (un lieu dans `lieu:`, un objet dans `objets:`) : `personnages:`, `tenues:`, `lieu:`, `objets:`, `planche commune:` ; `hook:` = lettre, nature, famille, ce qu'on voit, réplique. Puis `etape: 1`.
@@ -117,46 +118,60 @@ Reprise à l'étape `etape + 1`, en relisant seulement `etat.md`, `vision.md`, `
    - `ARRÊT: solde` : une phrase sur le solde : « Il manque X crédits pour les images. », puis `show_plans_and_credits`. Rien n'est lancé ; atelier à nouveau quand le client a rechargé.
 5. Aucune vidéo tant qu'un élément de l'inventaire n'est pas prêt.
 
-## Moment 2 — Images et découpage
+## Moment 2 — Trame
 
-1. Réalisateur : `Vision` (`vision.md`, avec `Accroche : <lettre>`), `Durée`, `Segments`, `Route` (`seedance`, sauf `modele: kling` dans `etat.md`).
-2. **Vues du lieu** (`references/vues-lieu.md`) : les vues de `VUES DU LIEU` sans job dans `vues du lieu (job ids):` de `etat.md`. S'il y en a : la ligne d'attente si elle n'a pas été dite dans cette conversation (« Images en cours, environ une minute. »), puis atelier avec `Vues du lieu` (`SCRIPT` du retour), `Vues`, `Prix annoncé` (prix d'une vue × nombre de vues, lu dans `## Vues du lieu` de `vision.md`), `Plafond` (même règle qu'en `## Coulisse — Images`, point 3). Retour comme en `## Coulisse — Images`, point 4 ; `BLOQUÉ` sur une vue : montrer la `PHRASE`, puis réalisateur avec `Correction` (la vue simplifiée) et atelier avec `Refaire: oui` pour cette vue.
-3. Un seul `show_generation_by_ids` : les vues du lieu (`vues du lieu (job ids):`, vue 1 d'abord), puis toutes les images de l'inventaire, existantes comprises : planches, tenues, lieux, objets, planche commune (job ids de `images (job ids):`, et ceux des fiches pour les éléments existants).
-4. Message, sous les images : la `PHRASE` du réalisateur s'il y en a une, le découpage tel que renvoyé (une phrase par plan), puis `On garde ? Si oui, je lance la vidéo : 💳 ~<PRIX> crédits.`
+1. Réalisateur : `Vision` (`vision.md`, avec `Accroche : <lettre>`), `Durée`, `Route` (`seedance`, sauf `modele: kling` dans `etat.md`).
+2. **Vues du lieu** (`references/vues-lieu.md`) : les vues de `VUES DU LIEU` sans job dans `vues du lieu (job ids):` de `etat.md`. S'il y en a : la ligne d'attente si elle n'a pas été dite dans cette conversation (« Images en cours, environ une minute. »), puis atelier avec `Vues du lieu` (`SCRIPT` du retour), `Vues`, `Prix annoncé` (prix d'une vue × nombre de vues, lu dans `## Vues du lieu` de `vision.md`), `Plafond` (même règle qu'en `## Coulisse — Images`, point 3). Retour comme en `## Coulisse — Images`, point 4 ; `BLOQUÉ` sur une vue : montrer la `PHRASE`, puis réalisateur avec `Correction : trame : <la vue simplifiée>` et atelier avec `Refaire: oui` pour cette vue.
+3. Un seul `show_generation_by_ids`, dans cet ordre : l'image de base de chaque lieu (`bases du lieu (job ids):`, sinon `lieu:<slug>` de `images (job ids):` ou la fiche), les vues (`vues du lieu (job ids):`, vue 1 d'abord), puis planches, tenues, objets, planche commune (existants compris).
+4. Message, sous les images : la `PHRASE` s'il y en a une, la trame telle que renvoyée, puis `On garde la trame ? Si oui, je lance le cut 1 : 💳 ~<X> crédits pour l'ensemble.` (X = `PRIX` du réalisateur). Ce « oui » vaut pour tous les cuts de la trame : un brouillon et une finalisation chacun.
 5. Changement demandé : une seule modification à la fois ; plusieurs → l'une après l'autre. Une vue n'est refaite ou ajoutée que si la correction touche ce qu'elle fixe (`references/vues-lieu.md#Corrections`) ; elle compte alors dans la ligne de prix des images, et l'atelier la fait avec `Vues du lieu`, `Vues`, `Refaire: oui`.
-   - **Image de l'inventaire** : ligne `image-refus` au journal. Prix en une ligne `💳 ~X crédits` : au premier refus de cet élément, les deux images du duel (`references/choix-modele.md#Duel`, point 2) ; sinon, ou avec un gagnant net dans `preferences.md`, une image ; pour un lieu, plus ses vues (`## Vues du lieu` de `script.md`). Atelier avec `Correction`, `Duel: oui` au premier refus, `Prix annoncé`, `Plafond`. Duel : un seul `show_generation_by_ids` avec les deux rendus, « A ou B ? ». Au choix : l'agent principal met à jour la fiche (`## Enregistrement` du type, ligne `## Historique`), l'entrée de l'élément dans `images (job ids):` de `etat.md`, le statut `pret` dans `## Inventaire` de `vision.md`, et écrit la ligne `duel` au journal (`references/choix-modele.md#Duel`, point 8). L'atelier ne range rien après un duel. Pour un lieu, puis ses vues.
+   - **Image de l'inventaire** : ligne `image-refus` au journal. Prix en une ligne `💳 ~X crédits` : au premier refus de cet élément, les deux images du duel (`references/choix-modele.md#Duel`, point 2) ; sinon, ou avec un gagnant net dans `preferences.md`, une image ; pour un lieu, plus ses vues (`## Vues du lieu` de `script.md`). Atelier avec `Correction`, `Duel: oui` au premier refus, `Prix annoncé`, `Plafond`. Duel : un seul `show_generation_by_ids` avec les deux rendus, « A ou B ? ». Au choix : l'agent principal met à jour la fiche (`## Enregistrement` du type, ligne `## Historique`), l'entrée de l'élément dans `images (job ids):` de `etat.md` (pour un lieu, aussi `bases du lieu (job ids):`), le statut `pret` dans `## Inventaire` de `vision.md`, et écrit la ligne `duel` au journal (`references/choix-modele.md#Duel`, point 8). L'atelier ne range rien après un duel. Pour un lieu, puis ses vues.
    - **Vue seule** (la vue ne change pas, le rendu déplaît) : ligne `image-refus` au journal ; même règle de duel, type `vue-lieu` ; atelier avec `Vues du lieu`, `Vues` (cette vue), `Duel: oui`. Au choix : l'agent principal remplace l'entrée de la vue dans `vues du lieu (job ids):` et écrit la ligne `duel`.
-   - **Plan** (action, position, cadrage, réplique) : ligne `script-correction` au journal ; réalisateur avec `Correction` ; aucune image refaite (`VUES DU LIEU: aucune`), pas de ligne de prix d'image. Si le plan demande une position de caméra qu'aucune vue ne couvre, ou si la lumière change : `VUES DU LIEU` les nomme, leur prix en une ligne, puis atelier.
-   - **Plan qui demande un élément nouveau** (« plutôt dans un parc ») : ligne `script-correction` au journal ; ajouter l'élément à `## Inventaire` de `vision.md` (statut `nouveau`), prix de l'image et de ses vues (un lieu) en une ligne, atelier avec `Correction` pour ce seul élément, puis réalisateur avec `Correction`, puis atelier pour les vues. Le nouveau prix de la vidéo ne s'affiche qu'une fois les images prêtes.
-   - Réafficher seulement ce qui a changé (images, vues, lignes du découpage), puis la ligne de prix avec le nouveau prix.
-   - Durée portée au-delà de 30 s : concepteur avec `Correction`, sa carte annonce les parties et le nouveau prix (afficher ses lignes changées ; des vues de plus seulement si un lieu s'ajoute), puis réalisateur avec les nouveaux `Durée` et `Segments`, puis atelier pour les vues nouvelles.
-6. « Oui » explicite (`## Règle d'argent`) : `etat.md` : `script:` (lu sur `SCRIPT`), `modele:` (lu sur `ROUTE`), `prix video:`, `montant autorise:` = ce prix, `etape: 3`.
+   - **Ligne de trame** (action, position, cadrage, réplique) : ligne `script-correction` au journal ; réalisateur avec `Correction : trame : <la modification>` ; aucune image refaite (`VUES DU LIEU: aucune`), pas de ligne de prix d'image. Si la ligne demande une position de caméra qu'aucune vue ne couvre, ou si la lumière change : `VUES DU LIEU` les nomme, leur prix en une ligne, puis atelier.
+   - **Ligne de trame qui demande un élément nouveau** (« plutôt dans un parc ») : ligne `script-correction` au journal ; ajouter l'élément à `## Inventaire` de `vision.md` (statut `nouveau`), prix de l'image et de ses vues (un lieu) en une ligne, atelier avec `Correction` pour ce seul élément, puis réalisateur avec `Correction : trame : <la modification>`, puis atelier pour les vues. Le nouveau prix de la trame ne s'affiche qu'une fois les images prêtes.
+   - Réafficher seulement ce qui a changé (images, vues, lignes de la trame), puis `On garde la trame ? Si oui, je lance le cut 1 : 💳 ~<X> crédits pour l'ensemble.` avec le nouveau prix (X = le `Total` de `## Prix` de `script.md`, trame corrigée entière : rien n'est encore accepté, un cut retiré fait baisser le prix).
+6. Réponse qui n'est pas un « oui » explicite (« ok pour la trame », « ça me va ») : rien ne part ; une ligne : `Pour lancer le cut 1, il me faut votre « oui » : 💳 ~<X> crédits pour l'ensemble.`
+7. « Oui » explicite : `etat.md` : `script:` (lu sur `SCRIPT`), `modele:` (lu sur `ROUTE`), `prix trame:`, `montant autorise:` = ce prix ; une ligne par cut dans `## Cuts`, tirée de `CUTS` (`| <n> | <phrase> | <lieu> | <vue> | <durée> s | à faire | | |`) ; `etape: 3` ; puis `## Moment 3 — Boucle par cut`.
 
-## Coulisse — Tournage
+## Moment 3 — Boucle par cut
 
-1. Blocage : relire `## Inventaire` de `vision.md`. Chaque ligne doit être `pret`, `existant` ou `en-mots` (tenue mineure décrite en mots), et chaque vue de `## Vues du lieu` de `script.md` avoir son job dans `vues du lieu (job ids):`. Sinon, aucune vidéo : `## Coulisse — Images`, ou `## Moment 2 — Images et découpage`, point 2, pour ce qui manque.
-2. `balance`. Solde sous le prix : « Il manque X crédits. », puis `show_plans_and_credits`. Rien n'est lancé.
-3. Une ligne : « Vidéo en cours, environ N minutes. » (N = 5 par segment).
-4. Tournage : `Mode: video`, `Script` (`script:` de `etat.md`), `Route` (`modele:`), `Montant autorisé` (`montant autorise:`).
-5. Retour :
-   - `VIDÉO` : `etape: 4`, puis moment 3.
-   - `ARRÊT: solde` : point 2.
-   - `ARRÊT: dépassement` : nouveau prix (celui de la phrase du tournage ; à défaut, redemander le réalisateur), ligne `💳 ~X crédits`, nouveau « oui », `prix video:` et `montant autorise:` mis à jour, puis tournage (les jobs déjà soumis sont repris, jamais repayés).
-   - `ARRÊT: échec` : `## Erreurs`. Un seul segment échoué : une phrase, son prix en ligne `💳 ~X crédits` (lu dans la phrase du tournage), nouveau « oui », `montant autorise:` = ce prix, puis tournage, qui ne refait que ce segment.
+Le client voit chaque cut en brouillon et le garde ou le corrige ; un cut gardé se finalise pendant que le suivant se tourne. `Prix :` d'un cut = la ligne `Prix :` de son bloc dans `## Prompts des cuts` de `script.md` (dernière version).
 
-## Moment 3 — Vidéo livrée
+1. **Lancer un cut.** Blocage : chaque ligne de `## Inventaire` est `pret`, `existant` ou `en-mots`, l'image de base et la vue du cut ont leur job ; sinon, aucune vidéo (`## Coulisse — Images`, ou `## Moment 2 — Trame`, point 2, pour ce qui manque). `balance` : solde sous le prix → « Il manque X crédits. », `show_plans_and_credits`. Une ligne : `Cut <N> en cours, environ deux minutes.` Tournage : `Consigne : cut <N> brouillon`, `Script` (`script:` de `etat.md`), `Route`, `Montant autorisé` = prix du brouillon de ce cut. `Route` : `seedance`, sauf un cut dont le bloc porte `Prix : kling` (`Route : kling`) ; une seule `Route` par appel : un cut Kling a toujours son propre appel, pour son brouillon comme pour sa finalisation.
+2. **Montrer le cut.** `show_generation_by_ids` sur le job de `CUT`. Message : les défauts renvoyés, un par ligne, s'il y en a, puis `Cut <N>/<total> : <phrase du cut>. On garde, ou je corrige ?` (phrase = colonne `phrase` de `## Cuts`).
+3. **« On garde ».** Ne vaut que pour ce cut. Statut `gardé` dans `## Cuts`, ligne `cut-garde` au journal (`essais=` le nombre de brouillons du cut). Tournage, en un appel : `Consigne : cut <N> finaliser`, puis, si ce cut est le premier gardé où un personnage parle seul et que ce personnage parle encore dans un cut suivant sans extrait dans `## Voix` : `extraire voix <personnage> cut <N>`, puis `cut <M> brouillon` pour le premier cut `à faire` s'il en reste un (un cut suivant déjà en `brouillon` est montré tel quel, point 2) ; `Montant autorisé` = finalisation de ce cut + brouillon du suivant. Avant l'appel, la ligne d'attente du point 1 pour le cut suivant. Le cut suivant est montré dès son retour (point 2) ; aucune attente pour la finalisation.
+   Dernier cut à garder : la ligne `Montage en cours, environ une minute.`, puis `Consigne : cut <N> finaliser ; monter`, `Montant autorisé` = finalisation de ce cut, puis `## Coulisse — Montage`, point 3. Le tournage attend toutes les finalisations ; retour `FINAL: <N>=<job id> (en cours)` sans `MONTAGE` ni `ARRÊT` : nouvel appel `Consigne : monter` (`## Coulisse — Montage`, point 2), sans rien dire de plus au client.
+4. **Correction d'un cut.** Une seule modification à la fois (plusieurs → l'une après l'autre). Ligne `cut-correction` au journal. Réalisateur : `Correction : cut <N> : <la modification>`, `Cuts` (statuts) ; seul ce cut est réécrit. Message : la `PHRASE` s'il y en a une, puis `Si oui, je refais le cut <N> : 💳 ~<X> crédits.` (X = `PRIX`, le seul brouillon : la finalisation est déjà comprise dans le « oui » de la trame ; pour un cut déjà `gardé` ou `final`, `PRIX` compte aussi sa finalisation). « Oui » : `montant autorise:` augmenté de X ; cut `gardé` ou `final` : colonne `final` vidée, statut `à faire` ; puis point 1 pour ce cut. Une position de caméra nouvelle : `VUES DU LIEU` la nomme, son prix en une ligne `💳 ~X crédits`, atelier, puis la vue est montrée avec la ligne `Si oui, je refais le cut <N> : 💳 ~<X> crédits.`
+5. **Même action ratée deux fois sur un cut.** `references/choix-modele.md#Arbre de décision` : la phrase de bascule de `references/choix-modele.md#Phrase au client`, réalisateur avec `Correction : cut <N> : route kling` et `Route: kling`, puis `Si oui, je refais le cut <N> : 💳 ~<X> crédits.` avec le prix Kling ; ce cut seulement. Le rendu Kling gardé est final tel quel : `Consigne : cut <N> finaliser`, `Route : kling`, seul dans son appel, `Montant autorisé : 0`.
+6. **Changement de trame en cours** (ajouter, retirer ou changer un cut pas encore gardé, ou en changer l'ordre) : ligne `script-correction` au journal ; réalisateur `Correction : trame : <la modification>`, `Cuts` ; message : les lignes de trame changées, puis `On garde la trame ? Si oui, je continue : 💳 ~<X> crédits de plus.` (X = `PRIX` : cuts ajoutés ou changés). `VUES DU LIEU` autre que `aucune`, ou élément nouveau (ajouté à `## Inventaire` de `vision.md`, statut `nouveau`, comme au `## Moment 2 — Trame`, point 5) : leur prix en une ligne `💳 ~Y crédits` avant la question, Y compris dans X ; rien ne part sans ce « oui ». « Oui » : atelier d'abord pour ces images et vues (`Prix annoncé` = Y), puis `## Cuts` mis à jour depuis `CUTS` (cuts gardés et non touchés inchangés ; cut retiré `à faire` : ligne supprimée ; cut changé déjà généré : statut `à faire`, colonne `final` vidée), `montant autorise:` augmenté de X ; la boucle reprend au premier cut qui n'est pas `final` ni `gardé`.
+7. Ne valent pas « oui » : le silence, « ok pour la trame », « ça me va », « on garde » (qui ne vaut que pour garder le cut montré), un « oui » à une autre question, un « oui » d'une conversation précédente.
+8. Retours du tournage :
+   - `ARRÊT: solde` → « Il manque X crédits. », `show_plans_and_credits` ; même appel quand le client a rechargé.
+   - `ARRÊT: dépassement` → le prix qui manque en une ligne (`💳 ~X crédits de plus`, lu dans la phrase du tournage), nouveau « oui », `montant autorise:` augmenté, puis même appel (les jobs déjà soumis sont repris, jamais repayés).
+   - `ARRÊT: échec` sur un brouillon → une phrase au client, puis le prix d'un nouvel essai lu dans la phrase du tournage, avec `Si oui, je refais le cut <N> : 💳 ~<X> crédits.` « Oui » : `montant autorise:` augmenté de X, point 1 pour ce cut.
+   - `ARRÊT: échec` sur une finalisation, brouillon de plus de sept jours (la phrase du tournage le dit) → une phrase, puis `Si oui, je refais le cut <N> : 💳 ~<X> crédits.` (X = nouveau brouillon, ligne `Prix :` du bloc ; sa finalisation reste comprise dans le « oui » de la trame). « Oui » : `montant autorise:` augmenté de X, colonnes `brouillon` et `final` vidées, statut `à faire`, puis point 1 pour ce cut : le tournage ne reprend jamais un brouillon de plus de sept jours.
+   - `ARRÊT: échec` sur une autre finalisation → une phrase, puis `Si oui, je refais le cut <N> : 💳 ~<X> crédits.` (X = nouvelle finalisation du même brouillon gardé, lue dans la phrase du tournage). « Oui » : `montant autorise:` augmenté de X, puis `Consigne : cut <N> finaliser`, suivi de `cut <N+1> brouillon` si l'appel en échec l'avait enchaîné (le tournage reprend ce job déjà soumis et le rend, sans le repayer), ou de `monter` si plus aucun cut ne reste à garder (avec sa ligne d'attente), `Montant autorisé` = X ; le cut suivant est montré au retour (point 2).
+   - `VOIX: aucune — <slug> sans extrait` (extraction en échec, brouillon qui refuse l'extrait, ou `voix:<slug>` sans ligne dans `## Voix`) : le tournage a tiré le cut sans l'extrait, sans `ARRÊT`. Rien de plus au client : le cut est montré comme d'habitude (point 2). Avant le prochain appel au tournage : réalisateur avec `Correction : trame : sans extrait de voix pour <personnage>` (deux ou trois mots de voix dans les cuts encore `à faire`, `references/montage.md#Échec`), sans prix ni question. Le « oui » de la trame le couvre.
 
-1. Afficher la vidéo avec l'outil nommé par `AFFICHAGE`, sur l'identifiant de `VIDÉO`.
-2. Message : les défauts renvoyés, un par ligne avec leur instant, ou « Rien à signaler de mon côté. » ; puis « On garde, ou je corrige quelque chose ? ». Journal : ligne `video-avis` à la réponse.
-3. Correction : une seule modification ; ligne `script-correction` au journal ; réalisateur avec `Correction` ; `VUES DU LIEU` n'est pas `aucune` (lieu, lumière ou position nouvelle) : leur prix en une ligne, puis atelier avec `Vues du lieu`, `Vues`, `Refaire: oui` ; afficher les vues refaites s'il y en a, les lignes changées et `On garde ? Si oui, je relance la vidéo : 💳 ~<PRIX> crédits.` ; nouveau « oui » ; `etat.md` : `script:`, `prix video:`, `montant autorise:`, `etape: 3`, lignes vidéo de `## Jobs payants` vidées (`video`, `montage` ; images et vues gardées) ; puis `## Coulisse — Tournage`.
-4. Voix qui ne va pas (« trop jeune », « trop aiguë ») : réalisateur avec `Correction`, deux ou trois mots de voix dans la présentation du personnage (`references/fiche-personnage.md#Voix`). Visage qui change d'un plan à l'autre : réalisateur avec `Correction` (le plan qui dérive nomme le personnage et sa planche). Même action ratée deux fois : `references/choix-modele.md#Arbre de décision` : 15 s ou moins, la phrase de bascule de `references/choix-modele.md#Phrase au client` (les visages ne seront pas ceux des fiches), puis réalisateur avec `Route: kling` ; au-delà de 15 s, la phrase qui propose de raccourcir. Chaque fois, suite du point 3, avec `modele:` mis à jour.
+## Coulisse — Montage
+
+1. Avant chaque appel `monter` (ou `cut <N> finaliser ; monter`), une ligne : `Montage en cours, environ une minute.`
+2. Tournage : `Consigne : monter`, `Montant autorisé : compris dans la trame` (l'assemblage n'a pas de `get_cost` ; son coût, faible, est compris dans le « oui » de la trame). Retour `FINAL: <N>=<job id> (en cours)` sans `MONTAGE` : appeler à nouveau `monter`.
+3. Retour `MONTAGE` : `etape: 4`, puis moment 4. `ARRÊT: échec` venu d'une finalisation : `## Moment 3 — Boucle par cut`, point 8 (finalisation en échec). `ARRÊT: échec` du montage lui-même : `montage (media id): échec` ; une phrase, aucun cut n'est refait, puis `Si oui, je refais le montage : 💳 ~<X> crédits.` (estimation faible, sinon « estimation inconnue, faible », `references/cout.md#Avant`) ; « oui » : `montant autorise:` augmenté de X, `montage (media id):` vidé, puis `Consigne : monter`, `Montant autorisé` = X. Jamais de nouvel appel sans ce « oui » (`references/montage.md#Échec`), à la reprise comme ici.
+
+## Moment 4 — Vidéo montée
+
+1. `show_medias` sur le media id de `MONTAGE` (à la reprise : `montage (media id):`).
+2. Message : les défauts renvoyés, au plus deux, un par ligne avec leur instant, ou `Rien à signaler de mon côté.` ; puis `On garde, ou je corrige ?` Journal : ligne `video-avis` à la réponse.
+3. Correction : une seule modification, sur le cut qu'elle vise (cut ambigu : une question, « Quel moment : <phrase du cut a> ou <phrase du cut b> ? ») ; ligne `cut-correction` ; réalisateur `Correction : cut <N> : <la modification>`, `Cuts` ; message `Si oui, je refais le cut <N> : 💳 ~<X> crédits.` (X = nouveau brouillon + nouvelle finalisation, montage refait compris) ; « oui » : colonne `final` de ce cut vidée, statut `à faire`, `montage (media id):` vidé, `montant autorise:` augmenté, `etape: 3`, puis `## Moment 3 — Boucle par cut`, point 1, pour ce cut seulement ; une fois gardé : `cut <N> finaliser ; monter`. Plusieurs cuts refaits l'un après l'autre : `cut <N> finaliser` seul pour chacun, et `monter` une seule fois, après le dernier gardé.
+4. Voix qui ne va pas (« trop jeune », « trop aiguë ») : la correction vise le premier cut où ce personnage parle ; réalisateur avec `Correction : cut <N> : <deux ou trois mots de voix>` (`references/fiche-personnage.md#Voix`) ; suite du point 3, sauf l'appel une fois ce cut gardé : `cut <N> finaliser ; extraire voix <personnage> cut <N>`, sans `monter` (le nouvel extrait remplace l'ancien dans `## Voix`). Les autres cuts où il parle gardent l'ancienne voix : le dire en une phrase et proposer de les refaire, l'un après l'autre (réalisateur avec `Correction : cut <M> : nouvel extrait de voix`, puis `Si oui, je refais le cut <M> : 💳 ~<X> crédits.` pour chacun ; chaque cut gardé : `cut <M> finaliser` seul). Refus, ou dernier cut refait et gardé : `## Coulisse — Montage`, une seule fois.
 5. Gardée : `etape: 5`.
 
 ## Sous-titres
 
 1. Une question de style (`references/sous-titres.md#Style`) : dernier choix de `preferences.md` proposé s'il existe. Style noté dans `preferences.md`, `## Sous-titres`, à la place de l'ancien.
 2. Coût en une ligne, sans « oui » : `💳 ~X crédits` (sans estimation : « estimation inconnue, faible », `references/cout.md#Avant`).
-3. Tournage : `Mode: sous-titres`, `Style`, `Montant autorisé` = le prix annoncé des sous-titres.
+3. Tournage : `Consigne : sous-titres`, `Style`, `Montant autorisé` = le prix annoncé des sous-titres.
 4. Retour `SOUS-TITRES` : `etape: 6`. `ARRÊT: échec` : une phrase, la vidéo est livrée sans sous-titres, `etape: 6`. `ARRÊT: solde` : « Il manque X crédits. », `show_plans_and_credits`.
 
 ## Bilan
@@ -171,12 +186,12 @@ Reprise à l'étape `etape + 1`, en relisant seulement `etat.md`, `vision.md`, `
 Détail : `references/cout.md`.
 
 - **Images et vues du lieu** : prix dans la ligne `Je fixe` de la carte, sans question ; une image ou une vue refaite après une correction : prix en une ligne, sans question. **Sous-titres** : prix en une ligne, sans question.
-- **Vidéo** : prix affiché au moment 2, puis « oui » explicite. Ce « oui » couvre la vidéo entière, segments et montage compris. Le tournage reçoit ce montant et ne dépense rien au-delà.
+- **Trame** : prix global affiché au moment 2 (un brouillon et une finalisation par cut, extraction des voix et montage compris), puis « oui » explicite ; ce « oui » vaut pour tous les cuts de la trame. **Nouvel essai d'un cut** : son prix, puis « oui ». **Cuts ajoutés ou changés** : leur prix, puis « oui ». **Reprise** : ce qui reste à payer, puis « oui ». Le tournage reçoit, à chaque appel, le prix des consignes de cet appel, et ne dépense rien au-delà.
 - L'atelier reçoit un `Plafond` = prix annoncé + 3 × une image au tarif du modèle d'image le plus cher (relance muette et les deux rendus du duel d'un échec technique). Au-delà : une phrase avec le nouveau prix avant de relancer.
-- Ne valent pas accord de dépense : le silence, « ok pour le découpage », « ça me va », un « oui » à une autre question, un « oui » d'une conversation précédente.
-- `get_cost:true` avant chaque vidéo, et avant chaque image quand l'outil l'accepte.
+- Ne valent pas accord de dépense : le silence, « ok pour la trame », « ça me va », « on garde » (qui ne vaut que pour garder le cut montré), un « oui » à une autre question, un « oui » d'une conversation précédente.
+- `get_cost:true` avant chaque brouillon, chaque finalisation et chaque image quand l'outil l'accepte.
 - `balance` avant chaque génération payante. Solde insuffisant : s'arrêter et annoncer le montant qui manque.
-- Relance payante ou bascule vers un autre modèle, pour une vidéo : nouveau `get_cost`, nouveau prix, nouveau « oui ». Jamais l'ancien prix ni l'ancien accord. Pour une image ou les sous-titres : nouveau prix annoncé en une ligne, sans « oui » (relance muette d'un échec technique : sous le plafond, sans annonce).
+- Bascule d'un cut vers Kling : nouveau `get_cost`, nouveau prix, nouveau « oui ». Jamais l'ancien prix ni l'ancien accord. Pour une image ou les sous-titres : nouveau prix annoncé en une ligne, sans « oui » (relance muette d'un échec technique : sous le plafond, sans annonce).
 - Ne jamais passer `use_unlim`. Si un outil renvoie `unlim_choice`, poser la question au client telle quelle.
 
 ## Erreurs
@@ -186,12 +201,15 @@ Détail : `references/cout.md`.
 | Higgsfield non connecté | Message de `## Démarrage` point 1. Stop. |
 | Sous-agent sans Higgsfield (`HIGGSFIELD_INDISPONIBLE`), outil Agent absent | Repli de `## Sous-agents` : l'agent principal fait les appels lui-même, mêmes règles de message. |
 | Solde insuffisant | « Il manque X crédits. », `show_plans_and_credits`. Rien n'est lancé. |
-| Contenu refusé pour conformité | `references/conformite.md#Reformulations types`, une phrase ; relance = nouvel achat (vidéo : prix + « oui »). |
+| Contenu refusé pour conformité | `references/conformite.md#Reformulations types`, une phrase ; relance = nouvel achat (cut : prix + « oui »). |
 | Image en échec technique | Géré par l'atelier (`references/choix-modele.md#Échec technique d'une image`) ; au 3e échec, sa `PHRASE`. |
 | Image refusée par le client | Ligne `image-refus`, duel (`references/choix-modele.md#Duel`). |
-| Vidéo ratée, 1re fois | Une phrase au client ; réalisateur avec `Correction` : reformuler le plan fautif ; nouveau prix, nouveau « oui ». |
-| Même action ratée une 2e fois | `references/choix-modele.md#Arbre de décision` ; nouveau prix, nouveau « oui ». |
+| Cut raté, 1re fois | Une phrase ; réalisateur `Correction : cut <N>` ; M3, nouveau « oui ». |
+| Même action ratée une 2e fois sur un cut | `references/choix-modele.md#Arbre de décision`, Kling pour ce cut ; M3. |
+| Brouillon de plus de sept jours (date de la colonne `brouillon`) | Jamais finalisé ni repris : nouveau brouillon, M3 (à la reprise : la ligne de prix de `## Démarrage`, point 4), nouveau « oui », colonnes `brouillon` et `final` vidées, statut `à faire`. |
+| Extrait de voix en échec, refusé ou absent | Le tournage tire le cut sans extrait (`VOIX: aucune — <slug> sans extrait`) ; réalisateur pour les mots de voix des cuts `à faire` ; aucun prix, aucune question. |
 | Dépassement du montant autorisé | Nouveau prix, nouveau « oui ». |
-| Timeout, réponse perdue, conversation coupée | Reprendre le job par son id (`## Jobs payants`), jamais de nouvelle soumission à l'aveugle. |
+| Timeout, réponse perdue, conversation coupée | Reprendre le job par son id (`## Jobs payants`, `## Cuts`), jamais de nouvelle soumission à l'aveugle. |
 | Sous-titres en échec | Vidéo livrée sans sous-titres, une phrase. |
-| Plus de 30 s demandées | Film en segments, annoncé dans la carte (`references/script.md#Segments`). |
+
+M3 : `Si oui, je refais le cut <N> : 💳 ~<X> crédits.`
