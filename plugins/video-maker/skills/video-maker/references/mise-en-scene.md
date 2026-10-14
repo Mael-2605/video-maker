@@ -7,9 +7,9 @@
 
 Un plan sans fonction narrative est supprimé, pas amélioré. Chaque plan répond à une question : qu'est-ce que le spectateur comprend maintenant qu'il ne comprenait pas une seconde avant ? C'est la ligne `Pourquoi :` du plan (`references/script.md#Plans`).
 
-Ordre de travail, toujours le même, même pour une idée simple : beats, plan du lieu, registre des objets et du son, blocking, répliques, auto-contrôle. Le prompt de chaque cut s'écrit ensuite, court (`references/script.md#Version prompt`) : il ne garde que le résultat de ce travail, qui fait quoi, où, vers quoi (`## Dans le prompt`).
+Ordre de travail, toujours le même, même pour une idée simple : beats, plan du lieu, registre des objets et du son, blocking, répliques, auto-contrôle. Le prompt de chaque clip s'écrit ensuite, court (`references/script.md#Version prompt`) : il ne garde que le résultat de ce travail, qui fait quoi, où, vers quoi (`## Dans le prompt`).
 
-La mise en scène couvre toute la trame : chaque cut est généré seul, la continuité d'un cut à l'autre ne vient que d'elle.
+La mise en scène couvre toute la trame : chaque clip est généré seul, la continuité d'un clip à l'autre ne vient que d'elle.
 
 ## Beats
 

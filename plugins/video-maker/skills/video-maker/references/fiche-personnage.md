@@ -120,10 +120,10 @@ Relecture avant de montrer, en plus de `references/anti-slop.md#Relecture avant 
 
 ## Voix
 
-Aucune voix à choisir, aucun extrait à payer à part. Seedance crée la voix avec l'image, à partir du personnage qu'il voit et de la réplique du prompt (`references/jeu.md#La réplique dans le plan`). Pour qu'elle ne change pas d'un cut à l'autre, la voix d'un premier cut gardé où il parle seul est extraite et jointe aux cuts suivants (`references/montage.md#Extraire une voix`) : c'est la voix que la vidéo a elle-même produite, pas une voix de synthèse.
+Aucune voix à choisir, aucun extrait à payer à part. Seedance crée la voix avec l'image, à partir du personnage qu'il voit et de la réplique du prompt (`references/jeu.md#La réplique dans le plan`). Pour qu'elle ne change pas d'un clip à l'autre, la voix d'un premier clip gardé où il parle seul est extraite et jointe aux clips suivants (`references/montage.md#Extraire une voix`) : c'est la voix que la vidéo a elle-même produite, pas une voix de synthèse.
 
 - Le client veut une voix particulière (« plus grave », « plus jeune ») : deux ou trois mots dans la présentation du personnage, au premier cut où il parle (`Jeff, a man in his forties with a deep, calm voice`). Jamais le mot « accent », jamais de consigne sur la bouche ni sur le débit.
-- Personnage qui parle dans plusieurs cuts sans cut où il parle seul : ces mots de voix sont identiques dans chaque cut où il parle.
+- Personnage qui parle dans plusieurs clips sans clip où il parle seul : ces mots de voix sont identiques dans chaque clip où il parle.
 - Fiche plus ancienne avec une voix, un `voice_id` ou un extrait : gardés tels quels dans la fiche, jamais utilisés.
 
 ## Modèle et appel
@@ -161,7 +161,7 @@ Déduites par le concepteur pour l'inventaire, générées par l'atelier. La pla
 4. Lire `## Tenues` dans la fiche du personnage. Une tenue rangée dont les pièces correspondent est reprise telle quelle, rien à payer. Les autres sont nouvelles.
 5. Garder la vidéo à 9 images au plus : `references/choix-modele.md#Limite de références`. Au-delà, la tenue la plus simple d'un personnage secondaire n'a pas d'image : elle est décrite en mots dans la vidéo, et la ligne `Je fixe` la nomme sans prix.
 
-La vidéo combine la planche (visage) et l'image de tenue sans tête (corps et vêtements) : combinaison validée au test réel du 2026-10-03. Si le visage dérive, voir SKILL.md, `## Moment 3 — Boucle par cut`.
+La vidéo combine la planche (visage) et l'image de tenue sans tête (corps et vêtements) : combinaison validée au test réel du 2026-10-03. Si le visage dérive, voir SKILL.md, `## Moment 3 — Boucle par clip`.
 
 Tenue au choix du skill, accordée au lieu (pas de costume trois pièces dans un bar de quartier). Le client la lit dans la ligne `Je fixe` : « deux tenues de Jeff : chemise en lin ouverte, puis torse nu en short de bain ».
 

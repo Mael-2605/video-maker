@@ -7,23 +7,23 @@
 
 Une image où le personnage est déjà placé dans le décor fige sa pose et sa lumière, et le modèle vidéo la recopie. Les tests du 2026-10-02/03 l'ont montré : le meilleur rendu vient des planches des personnages, de leurs tenues, de l'objet clé et de vues du lieu vide, chacune prise d'un autre endroit.
 
-Chaque cut reçoit deux images du lieu : l'image de base, qui tient le décor autour, et la vue de sa position de caméra, qui tient l'angle. Jamais les autres vues.
+Chaque clip reçoit, pour chaque lieu où il se passe, l'image de base, qui tient le décor autour, et la vue de chaque position de caméra de ses cuts, qui tient l'angle. Jamais les autres vues. Un clip d'un cut en reçoit donc deux ; un clip dont les cuts sont filmés de deux positions, trois.
 
 - Une vue montre le lieu vide depuis une position que les cuts utilisent. Les personnages viennent de leurs planches et de leurs tenues, les objets de leur planche.
 - Une vue par image : jamais un collage, un triptyque ni un écran partagé dans une même image.
 - Elle part en `image_references`, jamais en `start_image` ni `end_image`. Le mouvement, les gestes et la physique viennent du prompt vidéo.
-- Le cut qui se passe à cet endroit la cite en quelques mots (`the counter as in @Image 5`).
+- Le plan de chaque cut qui se passe à cet endroit la cite en quelques mots (`the counter as in @Image 5`).
 
 ## Nombre et prix
 
 - Une vue par position de caméra distincte des cuts esquissés : on regroupe les cuts par l'endroit où se tient la caméra. Un autre cadrage depuis le même endroit (plus serré, plus large) ne compte pas.
-- Repère : 1 à 3 pour un clip de 15 s dans un seul lieu ; un second lieu a ses propres vues. Tous les cuts tournés depuis la même position partagent la même vue. La limite de 9 images de la vidéo (`references/choix-modele.md#Limite de références`) peut réduire le nombre, jamais l'augmenter.
+- Repère : 1 à 3 pour une vidéo de 15 s dans un seul lieu ; un second lieu a ses propres vues. Tous les cuts tournés depuis la même position partagent la même vue. La limite de 9 images par clip (`references/choix-modele.md#Limite de références`) peut réduire le nombre, jamais l'augmenter.
 - Le concepteur compte les positions dans `## Histoire` de `vision.md` et fixe le nombre. Prix : `generate_image {model:"nano_banana_pro", prompt, aspect_ratio:"9:16", resolution:"2k", get_cost:true}` (~2 crédits), multiplié par n, compté dans le prix de la ligne `Je fixe`. Il écrit `<n> vue(s), ~<Y> crédits` sous `## Vues du lieu` de `vision.md`, puis une ligne par vue : `vue <N> : <lieu>, <position de la caméra> — cuts <a> à <b>`. L'image de base de chaque lieu est comptée à part, dans l'inventaire (`references/fiche-lieu.md`).
 - Le réalisateur ne dépasse jamais ce nombre.
 
 ## Image de base
 
-Rien à préparer ni à découper : l'image de base du lieu part telle quelle, par son job id (lieu nouveau : `lieu:<slug>` de `images (job ids):` ; lieu existant : `Image validée (job id)` de sa fiche). L'atelier l'écrit dans `etat.md`, `## Jobs payants`, ligne `bases du lieu (job ids):`, entrée `<slug>=<job id>`, s'il ne l'y trouve pas ; le tournage l'y lit pour chaque cut.
+Rien à préparer ni à découper : l'image de base du lieu part telle quelle, par son job id (lieu nouveau : `lieu:<slug>` de `images (job ids):` ; lieu existant : `Image validée (job id)` de sa fiche). L'atelier l'écrit dans `etat.md`, `## Jobs payants`, ligne `bases du lieu (job ids):`, entrée `<slug>=<job id>`, s'il ne l'y trouve pas ; le tournage l'y lit pour chaque clip.
 
 ## Prompt d'une vue
 
@@ -63,14 +63,22 @@ Règles :
 
 ## Dans un cut
 
-Ordre des médias et limite : `references/choix-modele.md#Limite de références`. Dans le paragraphe `References:` du cut, une phrase pour les deux images du lieu :
+Les images du lieu partent avec le clip qui contient le cut. Ordre des médias et limite : `references/choix-modele.md#Limite de références`. Dans le paragraphe `References:` du clip, une phrase pour les images du lieu : l'image de base, puis la vue de chaque position du clip, dans l'ordre des plans :
 
 ```
 @Image 4 shows the whole bar wide, from far back; @Image 5 is the same bar from
 behind the counter. They fix the set and the light only.
 ```
 
-Le plan du cut le dit en tête : `Shot (0-4s), the counter as in @Image 5:`. Il ne redécrit pas le lieu. Jamais `keyframe`, `start from`, `opens on`, `match this frame`, `in that order` ni `first frame`.
+Clip de deux cuts filmés de deux positions :
+
+```
+@Image 4 shows the whole bar wide, from far back; @Image 5 is the same bar from
+behind the counter; @Image 6 is the same bar from the terrace, looking in
+through the window. They fix the set and the light only.
+```
+
+Chaque plan le dit en tête : `Shot (0-4s), the counter as in @Image 5:` ; dans un clip de plusieurs cuts, après le cadrage : `Shot 2 (3-6s), wide shot through the window, the bar as in @Image 6:`. Il ne redécrit pas le lieu. Un clip qui change de lieu ajoute l'image de base du second lieu et sa vue, dans la limite de 9. Jamais `keyframe`, `start from`, `opens on`, `match this frame`, `in that order` ni `first frame`.
 
 ## Relecture
 
@@ -93,7 +101,7 @@ Les vues servent à un seul projet : pas de fiche. Juste après la soumission, c
 
 Une seule modification à la fois (`references/script.md#Retouches`). Une vue n'est refaite que si la correction touche ce qu'elle fixe.
 
-- **Cut corrigé** (action, geste, réplique, cadrage depuis le même endroit) : aucune vue refaite. Un cut qui demande une position de caméra qu'aucune vue ne couvre : une vue de plus, son prix en une ligne.
+- **Cut corrigé** (action, geste, réplique, cadrage depuis le même endroit) : aucune vue refaite ; son clip est refait avec les mêmes vues. Un cut qui demande une position de caméra qu'aucune vue ne couvre : une vue de plus, son prix en une ligne.
 - **Personnage, tenue ou objet changés** : aucune vue refaite.
 - **Lieu changé** : l'image de base d'abord, puis toutes ses vues.
 - **Style ou lumière changés** : toutes les vues du projet sont refaites.

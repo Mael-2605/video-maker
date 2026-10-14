@@ -6,12 +6,12 @@
 
 ## Principe
 
-- Le hook se joue dans les 0,4 à 2 premières secondes. Si rien ne bouge et rien ne s'entend à ce moment-là, le reste du clip n'est pas vu.
+- Le hook se joue dans les 0,4 à 2 premières secondes. Si rien ne bouge et rien ne s'entend à ce moment-là, le reste de la vidéo n'est pas vu.
 - Il n'ouvre jamais sur le produit, la marque ou le nom de l'enseigne. Il ouvre sur une chose humaine : un geste, une situation qu'on reconnaît, une scène déjà en cours. Le sujet arrive plus tard, comme une réponse.
 - Deux couches : ce qu'on voit à 0,4 s, ce qu'on comprend entre 1 et 3 s. Une image forte sans message, c'est un tour de magie sans chute.
 - Une tête qui parle, immobile, face caméra, n'est jamais un hook, même avec une bonne phrase. Même un hook parlé démarre sur un geste en cours.
 - L'image sert la phrase qui suit. Un objet sans lien avec le message est un gadget : on le retire.
-- Le hook trouve sa réponse avant la fin du clip. Une question laissée ouverte, c'est de l'attrape-clic.
+- Le hook trouve sa réponse avant la fin de la vidéo. Une question laissée ouverte, c'est de l'attrape-clic.
 - Une scène en cours vaut mieux qu'une question au spectateur : les « Vous aussi… ? » sont le gabarit que tout le monde recycle.
 
 Pour choisir, partir de ce que vit le spectateur avant la vidéo, face au sujet de la demande :
@@ -159,7 +159,7 @@ Un hook qui ne passe pas est reformulé avant d'être montré, jamais montré pu
 
 ## Budget de mots
 
-- Réplique d'accroche : 12 mots au plus, dite dans les 3 premières secondes. C'est un sous-budget du clip (`references/script.md#Durée et timing`), pas une durée à part.
+- Réplique d'accroche : 12 mots au plus, dite dans les 3 premières secondes. C'est un sous-budget de la vidéo (`references/script.md#Durée et timing`), pas une durée à part.
 - Hook parlé : le premier mot tombe à 0,4 s ou moins.
 - Hook visuel : l'action se lit entre 0,4 et 2 s, et son son tombe à 0,4 s ou moins. La première réplique commence au plus tard vers 2 s si elle est dite dans ce plan ; quand le plan 1 est un hook visuel de 2,5 à 4 s sans parole, elle arrive au début du plan 2 au plus tard.
 
@@ -194,11 +194,11 @@ C · <Nature> — <paragraphe de la version C>
 
 Laquelle ? Ou dites-moi ce qu'il faut changer.
 ```
-- `Style` : l'une des quatre familles de `references/script.md#Ouverture`, en mots simples (« comme au cinéma », « comme filmé au téléphone par un ami », « façon reportage, caméra à l'épaule », « comme une photo de produit en studio »), plus une précision au besoin. Une scène de fiction : « comme au cinéma » ; « filmé au téléphone » seulement si quelqu'un de la scène filme. `Lumière` : source, heure et couleur en mots de tous les jours ; c'est elle que reprennent l'image de base du lieu, ses vues et l'ouverture de chaque cut. `Prises de vue` : la caméra et la distance, communes aux trois versions, sans nombre de plans.
+- `Style` : l'une des quatre familles de `references/script.md#Ouverture`, en mots simples (« comme au cinéma », « comme filmé au téléphone par un ami », « façon reportage, caméra à l'épaule », « comme une photo de produit en studio »), plus une précision au besoin. Une scène de fiction : « comme au cinéma » ; « filmé au téléphone » seulement si quelqu'un de la scène filme. `Lumière` : source, heure et couleur en mots de tous les jours ; c'est elle que reprennent l'image de base du lieu, ses vues et l'ouverture de chaque clip. `Prises de vue` : la caméra et la distance, communes aux trois versions, sans nombre de plans.
 - `<Nature>` : « Parlé », « Visuel », « Situation », une fois chacune, dans l'ordre de `## Tenir compte des préférences`. A est la piste proche ; B et C, plus éloignées, ne le disent pas. Codes nature et famille dans `vision.md`, `## Accroches`, pas dans la carte.
 - `Je fixe` : existants marqués « déjà prêt » (« Jeff, déjà prêt ») ; nouveaux avec leurs choix en quelques mots ; puis l'image de base de chaque lieu et ses vues (« le bar vu de loin, et deux vues du bar, vide », `references/vues-lieu.md#Nombre et prix`). Le prix couvre les images nouvelles et les vues de la version A, sans question.
 - Une version qui demande un élément de plus (un lieu, un objet qui porte un plan) : à la fin de son paragraphe, `(+1 image : <élément>, ~<X> crédits)`.
-- Plus de 30 s : `Trois versions (1 min) :` ; la vidéo se fait cut par cut comme les autres.
+- Plus de 30 s : `Trois versions (1 min) :` ; la vidéo se fait clip par clip comme les autres.
 - Réplique reformulée pour conformité : pas de ligne à part. Le paragraphe de la version qui la porte (A, quand la phrase vient du client) finit par une courte proposition tirée de `references/conformite.md#Réponse au client` (« … ; j'ai reformulé la phrase, une pub ne peut pas promettre un résultat sûr. »).
 - Rien de la recherche n'apparaît dans la carte (vérités, angles, idées barrées) : chaque paragraphe raconte la version, il ne la justifie pas.
 - Correction de la carte : seules les lignes ou les paragraphes changés, avec le nouveau prix.
@@ -244,7 +244,7 @@ Laquelle ? Ou dites-moi ce qu'il faut changer.
 Le hook choisi écrit le début du plan du cut 1 (`references/script.md#Le plan du cut`) et la ligne 1 de la trame.
 
 - Les premiers mots du plan 1 sont le sujet (ou l'objet) et l'action du hook ; l'angle de caméra vient après. Pour un mécanisme, partir de son fragment « Plan 1 », réécrit en phrase de récit avec l'émotion nommée (`references/jeu.md#Jouer une intention`).
-- Cut 1 d'un hook visuel : 3 à 4 s (`Shot (0-4s)`), puis le cut 2 où la phrase se développe, ou la phrase dans le même cut si le geste la porte.
+- Cut 1 d'un hook visuel : 2 à 4 s (`Shot (0-4s)` seul dans le clip 1, ou `Shot 1 (0-2s)` suivi du cut 2 dans le même clip), puis le cut 2 où la phrase se développe, ou la phrase dans le même cut si le geste la porte.
 - Un angle de hook (vue de dessus, vue depuis la table, vue subjective, bascule de mise au point) s'écrit dans le plan 1 seulement.
 - Hook tourné dans un second lieu (voiture, entrée d'immeuble) : ce lieu a son image et sa vue, et le plan 1 la cite (`the van's cab as in @Image 6`).
 - Hook parlé : la réplique est dans le plan 1, amenée simplement (`references/jeu.md#La réplique dans le plan`), et le plan démarre sur un geste en cours, jamais sur une pose.

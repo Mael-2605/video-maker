@@ -33,7 +33,7 @@ On écrit l'émotion que le modèle sait jouer, précise, accrochée à l'action
 ## Rythme et dernier plan
 
 - Une action principale par plan, 3 à 5 s pour un plan avec jeu, 2 à 3 s pour un passage muet. Repère, pas règle : la durée découle des actions (`references/mise-en-scene.md#Blocking et jeu`).
-- Un seul plan par cut : `references/script.md#Le plan du cut`.
+- Un plan par cut. Un clip de plusieurs cuts a plusieurs plans, séparés par `Hard cut to:` seul sur sa ligne, chacun avec un cadrage nettement différent du précédent : `references/script.md#Le plan du cut`.
 - Le dernier plan garde du mouvement jusqu'à la dernière image : un sourire qui arrive, un regard, un verre qu'on lève. Après la dernière réplique, la bouche est fermée, mais le visage vit.
 - Pour une fin, jamais `hold`, `freeze`, `static pose` ni `stays still` : le clip s'éteint et le visage se fige.
 
@@ -95,11 +95,11 @@ Registre oral de Suisse romande, posé : on parle comme à un ami au café, pas 
 2. **Personne ne commente ce qu'il ressent ni pourquoi il agit.** Pas de « sinon je me dégonfle », « j'ose », « je repousse » : la gêne, le courage, l'hésitation se jouent (un rire nerveux, un regard qui fuit). Exception : un aveu à un proche, dit de travers, avec gêne.
 3. **Aucune formule.** Pas de réplique en deux temps symétriques (« X, j'ose. Y, je repousse. »), pas de chute citable, pas de jeu de mots. Si la phrase ferait une bonne légende sous la vidéo, elle est trop écrite.
 4. **Courte et facile à dire.** Une phrase entière qu'on dit d'un souffle, sans buter : environ 6 mots à l'écran, plus seulement si la demande l'exige et si le plan est assez long (`mots ÷ 3` secondes). Deux répliques courtes valent mieux qu'une longue.
-5. **Des phrases entières, lâches, comme à l'oral** : sujet, verbe, une politesse (« s'il vous plaît »), un mot qui désigne au lieu de décrire (« le monsieur, dehors », « celui-là », « là-bas »). Jamais de style télégraphique (« Lui, dehors. Un spritz. ») : personne ne commande un verre en trois mots-clés. Une hésitation (« ... ») quand la situation l'appelle (gêne, timidité), jamais par quota. Un « franchement », « bon » ou « hein » là où il tomberait à l'oral, deux au plus par clip, jamais en premier mot de l'accroche (`references/hooks.md#Ouvertures bannies`).
+5. **Des phrases entières, lâches, comme à l'oral** : sujet, verbe, une politesse (« s'il vous plaît »), un mot qui désigne au lieu de décrire (« le monsieur, dehors », « celui-là », « là-bas »). Jamais de style télégraphique (« Lui, dehors. Un spritz. ») : personne ne commande un verre en trois mots-clés. Une hésitation (« ... ») quand la situation l'appelle (gêne, timidité), jamais par quota. Un « franchement », « bon » ou « hein » là où il tomberait à l'oral, deux au plus par vidéo, jamais en premier mot de l'accroche (`references/hooks.md#Ouvertures bannies`).
 6. **Personne n'explique le produit.** Le produit, le service ou le message de la demande ne s'explique pas dans une réplique. Son nom est dit une fois au plus, jamais dans l'accroche. Dans une scène qui parle d'autre chose, il ne se colle pas à la réplique : il arrive à la fin, par un objet, un geste ou l'image seule.
 7. **Réponses indirectes** quand la situation s'y prête : une question gênante obtient une esquive, une contre-question ou un geste. Une question pratique (« Lequel ? ») obtient une réponse pratique.
 8. **Pas de « ne » systématique** : « c'est pas », « je sais pas ». On le garde quand la phrase doit sonner sérieuse ou polie (« je peux lui offrir un verre ? »). « T'as » et « y a » sont admis ; pas d'autre orthographe phonétique.
-9. **Couleur romande** : deux helvétismes au plus par clip, seulement là où ils viennent tout seuls, choisis pour l'âge et le milieu du personnage (natel, souper, ça joue, septante, « ou bien ? » en fin de phrase) ; jamais en premier mot, jamais en caricature.
+9. **Couleur romande** : deux helvétismes au plus par vidéo, seulement là où ils viennent tout seuls, choisis pour l'âge et le milieu du personnage (natel, souper, ça joue, septante, « ou bien ? » en fin de phrase) ; jamais en premier mot, jamais en caricature.
 10. **La chute ne résume pas.** Elle finit sur un geste, un regard ou une réplique courte qui décale. Jamais de morale.
 11. **Tics d'écriture** : chaque réplique passe `references/anti-slop.md#Tics d'écriture à bannir (répliques)`.
 12. **Test de l'improvisation** : écrire aussi la réponse de l'autre (même si on ne l'entend pas), puis lire l'échange à voix haute. Quelqu'un dirait-il exactement ces mots, dans cet ordre, s'il n'y avait pas de caméra ? Si on bute, le modèle butera aussi.
@@ -116,12 +116,12 @@ Avant / après :
 
 ## Son
 
-Une seule ligne, après le plan du cut, juste avant `No subtitles, no text.` : l'ambiance du lieu, du plus proche au plus lointain.
+Une seule ligne, après le dernier plan du clip, juste avant `No subtitles, no text.` : l'ambiance du lieu, du plus proche au plus lointain.
 
 `Ambient bar sounds, clinking glasses, soft murmur.`
 
 - 2 ou 3 sons du lieu, ceux qu'on entendrait vraiment là (verres, machine à café, rue, vagues, vent). Chaque son a sa source dans l'image (`references/mise-en-scene.md#Registre des objets et du son`) : pas d'oiseaux dans une pièce fermée.
-- **Pas de musique dans un cut** : chaque cut est généré à part, chacun jouerait un autre morceau et le montage la ferait sauter. L'ambiance du lieu suffit, identique dans chaque cut d'un même lieu (`references/script.md#Continuité entre les cuts`).
+- **Pas de musique dans un clip** : chaque clip est généré à part, chacun jouerait un autre morceau et le montage la ferait sauter. L'ambiance du lieu suffit, identique dans chaque clip d'un même lieu (`references/script.md#Continuité entre les cuts`). Un clip qui change de lieu met dans sa ligne les sons des deux lieux, dans l'ordre des plans.
 - Jamais de voix off ni de narration sauf demande du client, jamais de `whoosh` ni de montée d'effet : on ne les écrit pas. Un rendu précédent en avait ajouté : la ligne finit par `no voice-over, no whooshes` (`references/anti-slop.md#Exclusions en positif`).
 - Pas de liste de bruits datés geste par geste : le modèle met lui-même le son des gestes qu'il montre.
 
@@ -153,13 +153,13 @@ and she bites back a shy smile.
 
 Avant d'enregistrer le prompt, le relire ligne à ligne. Un point manque : corriger d'abord.
 
-- [ ] Cinq parties seulement : ouverture, `References:`, le plan du cut, ligne de son, `No subtitles, no text.` ; environ 150 à 220 mots (repère, pas règle).
-- [ ] `References:` : une courte proposition par média du cut, dans l'ordre des médias ; une tenue sans image décrite en mots ; l'extrait de voix, s'il y en a un, avec la phrase de `references/script.md#Version prompt`.
-- [ ] Cut 1 : il ouvre sur l'accroche choisie (`references/hooks.md#Du hook au premier plan`), en mouvement dès la première image.
-- [ ] Le plan : `Shot (0-<durée prévue>s)`, l'endroit avec sa vue, le début qui reprend la fin du cut d'avant, une action principale avec son arrivée, une émotion nommée et jouable, sa réaction quand quelque chose arrive à quelqu'un.
-- [ ] Chaque personnage présenté en 2 à 4 mots visibles, les mêmes dans chaque cut où il paraît.
-- [ ] Chaque réplique : `says to <who> in French, <intention>: "…"`, sans le mot « accent », sans description de voix ni de bouche ; elle tient dans sa fenêtre de parole (`mots ÷ 3` secondes).
-- [ ] Le cut bouge jusqu'à la fin ; sa réplique finit avant la fin prévue.
-- [ ] Le son en une ligne : l'ambiance du lieu, mot pour mot celle des autres cuts du même lieu, sources présentes dans l'image ; ni musique, ni voix off non demandée, ni effet.
-- [ ] Effort, terrain ou météo : l'état du corps dans la phrase du plan, sans recul d'un cut à l'autre (`## Physique de la situation`).
+- [ ] Cinq parties seulement : ouverture, `References:`, un plan par cut, ligne de son, `No subtitles, no text.` ; environ 150 à 220 mots pour un clip d'un cut, environ 50 à 80 mots par cut en plus (repère, pas règle).
+- [ ] `References:` : une courte proposition par média du clip, dans l'ordre des médias ; les images du lieu : l'image de base et la vue de chaque position du clip ; une tenue sans image décrite en mots ; l'extrait de voix, s'il y en a un, avec la phrase de `references/script.md#Version prompt`.
+- [ ] Clip 1 : il ouvre sur l'accroche choisie (`references/hooks.md#Du hook au premier plan`), en mouvement dès la première image.
+- [ ] Chaque plan : `Shot (0-<durée prévue>s)` pour un clip d'un cut ; sinon `Shot <k> (<début>-<fin>s)`, compté depuis le début du clip, le cadrage en tête, nettement différent du plan d'avant (distance ou angle), et `Hard cut to:` seul sur sa ligne entre deux plans, jamais de fondu. Puis l'endroit avec sa vue, une action principale avec son arrivée, une émotion nommée et jouable, sa réaction quand quelque chose arrive à quelqu'un. Le premier plan reprend la fin du clip d'avant.
+- [ ] Chaque personnage présenté en 2 à 4 mots visibles au premier plan où il paraît dans le clip, les mêmes dans chaque clip.
+- [ ] Chaque réplique : `says to <who> in French, <intention>: "…"`, sans le mot « accent », sans description de voix ni de bouche ; elle tient dans son plan et dans sa fenêtre de parole (`mots ÷ 3` secondes).
+- [ ] Le clip bouge jusqu'à la fin ; chaque réplique finit avant la fin de son plan.
+- [ ] Le son en une ligne : l'ambiance du lieu, mot pour mot celle des autres clips du même lieu, sources présentes dans l'image ; ni musique, ni voix off non demandée, ni effet.
+- [ ] Effort, terrain ou météo : l'état du corps dans la phrase du plan, sans recul d'un plan à l'autre ni d'un clip à l'autre (`## Physique de la situation`).
 - [ ] `references/mise-en-scene.md#Auto-contrôle` coché ; aucun mot de `references/anti-slop.md#Mots interdits dans les prompts` ; chaque réplique passe `references/anti-slop.md#Tics d'écriture à bannir (répliques)`.
